@@ -1,4 +1,6 @@
-# Q2
+# Q Testnet node installation guide 
+
+auth by: @nil1oki @ryssroad
 
 <details><summary>Official links</summary>
   
@@ -56,8 +58,6 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
   
 </details>
 </br>
-
-# Guide
 
 ## Подготовка сервера при необходимости
 </br>
