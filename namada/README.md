@@ -101,3 +101,10 @@ Fetching wasms for chain ID public-testnet-1.0.05ab4adb9db...
 2022-12-20T21:05:34.754102Z  INFO namada_apps::wasm_loader: Downloading WASM https://namada-wasm-master.s3.eu-west-1.amazonaws.com/tx_unbond.c0a690d0ad43a94294a6405bae3327f638a657446c74dc61dbb3a4d2ce488b5e.wasm...
 Successfully configured for chain ID public-testnet-1.0.05ab4adb9db
 ```
+
+## life after crash
+this doesn't work
+
+```bash
+tendermint unsafe-reset-all
+```
