@@ -28,7 +28,8 @@ Whitepaper - [https://q.org/assets/files/Q Whitepaper_v1.0.pdf](https://q.org/as
 </details>
     
 <details><summary>Faucet</summary>
-[https://faucet.qtestnet.org/](https://faucet.qtestnet.org/)
+
+[https://faucet.qtestnet.org](https://faucet.qtestnet.org/)
 </details>
 
 <details><summary>Documentation</summary>
