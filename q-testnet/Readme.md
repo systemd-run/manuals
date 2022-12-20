@@ -80,24 +80,24 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
     
 ### Начало
     
-    ✅Клонируем репозиторий и переходим в каталог /testnet-validator
+✅Клонируем репозиторий и переходим в каталог /testnet-validator
     
-    ```bash
-    git clone https://gitlab.com/q-dev/testnet-public-tools 
-    cd testnet-public-tools/testnet-validator
-    ```
+```bash
+git clone https://gitlab.com/q-dev/testnet-public-tools 
+cd testnet-public-tools/testnet-validator
+```
     
-    ✅Далее, создаем текстовый файл pwd.txt с паролем который находится в каталоге `testnet-public-tools/testnet-validator/keystore/`
+✅Далее, создаем текстовый файл pwd.txt с паролем который находится в каталоге `testnet-public-tools/testnet-validator/keystore/`
     
-    ```bash
-    cd $HOME/testnet-public-tools/testnet-validator/
-    mkdir keystore
-    cd keystore
-    nano pwd.txt
-    # придумываем пароль и вписываем, не забудьте его сохранить (без кавычек) 
-    # далее закрываем nano 
-    Ctrl+o enter Ctrl+x
-    ```
+```bash
+cd $HOME/testnet-public-tools/testnet-validator/
+mkdir keystore
+cd keystore
+nano pwd.txt
+# придумываем пароль и вписываем, не забудьте его сохранить (без кавычек) 
+# далее закрываем nano 
+Ctrl+o enter Ctrl+x
+```
     
 ### **Generate a Keypair for Validator**
     
