@@ -1,5 +1,5 @@
 # Q2
-
+<details>
 <summary>- Official links</summary>
   
     • Website - [https://q.org/](https://q.org/)
@@ -45,7 +45,7 @@
 - Official guide
   
     • [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
-    
+</details>
 - Guide
     - Подготовка сервера при необходимости
       
