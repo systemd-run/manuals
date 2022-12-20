@@ -1,6 +1,6 @@
 # Q2
-<details>
-- Official links
+
+<details><summary>Official links</summary>
   
     • Website - [https://q.org/](https://q.org/)
     
@@ -15,7 +15,9 @@
     • Reddit - [https://www.reddit.com/r/QBlockchain/](https://www.reddit.com/r/QBlockchain/)
     
     • Twitter - [https://twitter.com/QBlockchain](https://twitter.com/QBlockchain)
-    
+  
+</details>
+
 - Constitution & Whitepaper
   
     • Constitution - [https://q.org/assets/files/Q_Constitution.pdf](https://q.org/assets/files/Q_Constitution.pdf)
@@ -45,7 +47,7 @@
 - Official guide
   
     • [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
-</details>
+
 - Guide
     - Подготовка сервера при необходимости
       
