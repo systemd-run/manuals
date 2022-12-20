@@ -1,6 +1,9 @@
 ## manuals by systemd
 
 ### Nodes
+
+[Namada](https://github.com/systemd-run/manuals/tree/main/namada)
+
 [Q Testnet](https://github.com/systemd-run/manuals/tree/main/q-testnet)
 
 [XX Network](https://github.com/ryssroad/xx-network/tree/9d26f92743bcd9f35102d5abccd161525e6bbac6)
