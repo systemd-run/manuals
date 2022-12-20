@@ -4,3 +4,6 @@
 [submodule "xx-network"]
 	path = xx-network
 	url = https://github.com/ryssroad/xx-network
+[submodule "vercel-ppub"]
+	path = vercel-ppub
+	url = https://github.com/ryssroad/vercel-ppub
