@@ -266,4 +266,4 @@ docker-compose run --rm --entrypoint "geth account new --datadir=/data --passwor
 ## Special thanks
 
 [@nil1oki](https://github.com/nil1oki) - creating, 
-[@road](https://github.com/ryssroad) -formatting
+[@roadd](https://github.com/ryssroad) -formatting
