@@ -1,6 +1,6 @@
 # Q2
 
-- Official links
+<summary>- Official links</summary>
   
     • Website - [https://q.org/](https://q.org/)
     
