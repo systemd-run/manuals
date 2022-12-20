@@ -50,14 +50,14 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
   
 </details>
     
-<details><summary>Official guide
+<details><summary>Official guide</summary>
   
 [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
   
 </details>
   
-- Guide
-    - Подготовка сервера при необходимости
+#Guide
+    ###Подготовка сервера при необходимости
       
         ```bash
         # обновление 
