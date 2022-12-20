@@ -58,7 +58,7 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 </details>
 </br>
 
-## Подготовка сервера при необходимости
+<details><summary>Подготовка сервера при необходимости</summary>
 </br>
 
 ```bash
@@ -77,9 +77,9 @@ curl -L https://github.com/docker/compose/releases/download/v2.5.0/docker-compos
 chmod +x /usr/local/bin/docker-compose
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
-        
+</details>        
     
-## Начало
+## Установка
     
 Клонируем репозиторий и переходим в каталог /testnet-validator
     
