@@ -10,3 +10,6 @@
 [submodule "cheatsheets"]
 	path = cheatsheets
 	url = https://github.com/ryssroad/cheatsheets
+[submodule "quark-tasks"]
+	path = quark-tasks
+	url = https://github.com/systemd-run/quark-tasks
