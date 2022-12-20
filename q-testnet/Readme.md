@@ -61,6 +61,8 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 <details><summary>Подготовка сервера при необходимости</summary>
 </br>
 
+> Данный блок НЕ является обязательным, думайте головой )
+
 ```bash
 # обновление 
 apt update && apt upgrade -y
@@ -68,14 +70,9 @@ apt update && apt upgrade -y
 # установка необходимых утилит
 apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
         
-# установка docker одной строкой
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/installers/docker.sh)
-        
-# обновление docker-copmose до v2.5.0
-apt purge docker-compose -y
-curl -L https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+# установка docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
 ```
 </details>        
     
