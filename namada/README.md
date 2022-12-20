@@ -1,6 +1,6 @@
 ## namada setup
 
-```
+```bash
 sudo apt-get update -y
 sudo apt-get install build-essential make pkg-config libssl-dev libclang-dev -y
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
@@ -11,7 +11,9 @@ echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 source ~/.bash_profile
 
 
-sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+sudo apt install curl tar wget clang pkg-config libssl-dev jq build-essential \
+
+bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 
 sudo apt install -y uidmap dbus-user-session
 
@@ -50,7 +52,15 @@ cd && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git 
 make build
 
 
-cd && cp ~/tendermint/build/tendermint  /usr/local/bin/tendermint && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+cd && cp ~/tendermint/build/tendermint  /usr/local/bin/tendermint && \
+
+cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \ 
+
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 
 
 tendermint version
