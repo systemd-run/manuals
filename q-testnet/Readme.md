@@ -56,8 +56,9 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
   
 </details>
   
-#Guide
-    ###Подготовка сервера при необходимости
+# Guide
+
+### Подготовка сервера при необходимости
       
         ```bash
         # обновление 
@@ -77,7 +78,7 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
         ```
         
     
-    ### Начало
+### Начало
     
     ✅Клонируем репозиторий и переходим в каталог /testnet-validator
     
@@ -98,7 +99,7 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
     Ctrl+o enter Ctrl+x
     ```
     
-    ### **Generate a Keypair for Validator**
+### **Generate a Keypair for Validator**
     
     ✅Создается `.json` файл кошелька который находится в каталоге `/root/testnet-public-tools/testnet-validator/keystore/` - даный ключ экспортируем в `Metamask` , так же данный кошелек нужно указать в форме. Пароль от этого кошелька записан в `pwd.txt` .
     
@@ -131,7 +132,7 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
     
     ✅Ждем минут 10
     
-    ### **Создаем валидатора**
+### **Создаем валидатора**
     
     ✅Переходим на сайт [`https://hq.qtestnet.org/`](https://hq.qtestnet.org/), коннектим тестовый кошелек`Connect to Q Testnet` 
     
@@ -141,7 +142,7 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
     
     ![Q.png](assets/Q.png)
     
-    ### **Configure Setup**
+### **Configure Setup**
     
     ✅ Редактируем файл `.env` 
     
