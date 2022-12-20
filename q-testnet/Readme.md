@@ -28,8 +28,7 @@ Whitepaper - [https://q.org/assets/files/Q Whitepaper_v1.0.pdf](https://q.org/as
 </details>
     
 <details><summary>Faucet</summary>
-
-[https://faucet.qtestnet.org](https://faucet.qtestnet.org/)
+https://faucet.qtestnet.org/](https://faucet.qtestnet.org/)
 </details>
 
 <details><summary>Documentation</summary>
@@ -97,8 +96,7 @@ mkdir keystore
 cd keystore
 nano pwd.txt
 # придумываем пароль и вписываем, не забудьте его сохранить (без кавычек) 
-# далее закрываем nano 
-Ctrl+o enter Ctrl+x
+# далее закрываем nano Ctrl+o enter Ctrl+x
 ```
     
 ## Generate a Keypair for Validator
@@ -263,6 +261,15 @@ docker-compose run --rm --entrypoint "geth account new --datadir=/data --passwor
     # перезагружаем ноду
     docker-compose down -v && docker-compose up -d
 ```
+
+## Работа с нодой
+ Для того чтобы обновить ноду, извлечь ключ, создать аккаунт и др используем следующую команду:
+ 
+ ```bash
+ wget -q -O q.sh https://gitlab.com/q-dev/testnet-public-tools/-/snippets/2473910/raw/main/q.sh && chmod +x q.sh && /bin/bash q.sh
+ ```
+    
+   ![3.png](assets/3.png)
 
 ## Special thanks
 
