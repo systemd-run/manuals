@@ -3,25 +3,33 @@
 <details><summary>Official links</summary>
   
 - Website - [https://q.org/](https://q.org/)
+  
 - Mainnet - [https://hq.q.org/](https://hq.q.org/)
+  
 - Testnet - [https://hq.qtestnet.org/](https://hq.qtestnet.org/)
+  
 - ChainList - [https://chainlist.org/chain/35441](https://chainlist.org/chain/35441)
+  
 - Medium - [https://medium.com/q-blockchain](https://medium.com/q-blockchain)
+  
 - Reddit - [https://www.reddit.com/r/QBlockchain/](https://www.reddit.com/r/QBlockchain/)
-- Twitter - [https://twitter.com/QBlockchain](https://twitter.com/QBlockchain)
+  
+- Twitter - [https://twitter.com/QBlockchain](https://twitter.com/QBlockchain) 
   
 </details>
 
-- Constitution & Whitepaper
+<details><summary>Constitution & Whitepaper</summary>
   
-    • Constitution - [https://q.org/assets/files/Q_Constitution.pdf](https://q.org/assets/files/Q_Constitution.pdf)
-    
-    • Whitepaper - [https://q.org/assets/files/Q Whitepaper_v1.0.pdf](https://q.org/assets/files/Q%20Whitepaper_v1.0.pdf)
-    
-- Faucet
+- Constitution - [https://q.org/assets/files/Q_Constitution.pdf](https://q.org/assets/files/Q_Constitution.pdf)
   
+- Whitepaper - [https://q.org/assets/files/Q Whitepaper_v1.0.pdf](https://q.org/assets/files/Q%20Whitepaper_v1.0.pdf)
+  
+</details>
+    
+<details><summary>Faucet</summary>
     • [https://faucet.qtestnet.org/](https://faucet.qtestnet.org/)
-    
+</details>
+
 - Documentation
   
     • Documentation - [https://docs.q.org/](https://docs.q.org/)
