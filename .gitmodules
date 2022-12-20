@@ -1,0 +1,3 @@
+[submodule "lvm-on-hetzner"]
+	path = lvm-on-hetzner
+	url = https://github.com/ryssroad/lvm-on-hetzner
