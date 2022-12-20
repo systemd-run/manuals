@@ -55,11 +55,13 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
   
 </details>
-  
+</br>
+
 # Guide
 
-### Подготовка сервера при необходимости
-      
+## Подготовка сервера при необходимости
+</br>
+
 ```bash
 # обновление 
 apt update && apt upgrade -y
@@ -78,16 +80,16 @@ ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 ```
         
     
-### Начало
+## Начало
     
-✅Клонируем репозиторий и переходим в каталог /testnet-validator
+Клонируем репозиторий и переходим в каталог /testnet-validator
     
 ```bash
 git clone https://gitlab.com/q-dev/testnet-public-tools 
 cd testnet-public-tools/testnet-validator
 ```
     
-✅Далее, создаем текстовый файл pwd.txt с паролем который находится в каталоге `testnet-public-tools/testnet-validator/keystore/`
+Далее, создаем текстовый файл pwd.txt с паролем который находится в каталоге `testnet-public-tools/testnet-validator/keystore/`
     
 ```bash
 cd $HOME/testnet-public-tools/testnet-validator/
@@ -99,95 +101,99 @@ nano pwd.txt
 Ctrl+o enter Ctrl+x
 ```
     
-### **Generate a Keypair for Validator**
+## Generate a Keypair for Validator
+Создается `.json` файл кошелька который находится в каталоге `/root/testnet-public-tools/testnet-validator/keystore/` - даный ключ экспортируем в `Metamask` , так же данный кошелек нужно указать в форме. Пароль от этого кошелька записан в `pwd.txt`.
+
+</br>
+
+```bash
+cd $HOME/testnet-public-tools/testnet-validator/
+docker-compose run --rm --entrypoint "geth account new --datadir=/data --password=/data/keystore/pwd.txt" testnet-validator-node
+
+# вывод:
+
+# Your new key was generated
     
-    ✅Создается `.json` файл кошелька который находится в каталоге `/root/testnet-public-tools/testnet-validator/keystore/` - даный ключ экспортируем в `Metamask` , так же данный кошелек нужно указать в форме. Пароль от этого кошелька записан в `pwd.txt` .
+# Public address of the key:   0xb3FF24F818b0ff6Cc50de951bcB8f86b52287dac
+# Path of the secret key file: /data/keystore/UTC--2021-01-18T11-36-28.705754426Z--b3ff24f818b0ff6cc50de951bcb8f86b52287dac
     
-    ```bash
-    cd $HOME/testnet-public-tools/testnet-validator/
-    docker-compose run --rm --entrypoint "geth account new --datadir=/data --password=/data/keystore/pwd.txt" testnet-validator-node
-    # вывод:
-    # Your new key was generated
+# - You can share your public address with anyone. Others need it to interact with you.
+# - You must NEVER share the secret key with anyone! The key controls access to your funds!
+# - You must BACKUP your key file! Without the key, it's impossible to access account funds!
+# - You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
+```
     
-    # Public address of the key:   0xb3FF24F818b0ff6Cc50de951bcB8f86b52287dac
-    # Path of the secret key file: /data/keystore/UTC--2021-01-18T11-36-28.705754426Z--b3ff24f818b0ff6cc50de951bcb8f86b52287dac
+
+> 💡 Не забываем сохранять пароли и Ключи (UTC--…)
+
     
-    # - You can share your public address with anyone. Others need it to interact with you.
-    # - You must NEVER share the secret key with anyone! The key controls access to your funds!
-    # - You must BACKUP your key file! Without the key, it's impossible to access account funds!
-    # - You must REMEMBER your password! Without the password, it's impossible to decrypt the key!
-    ```
+Нужно 2 кошелька эфириум - для ревардов и тестовый, для удобства добавляем в основной кошелек Метамаск наш тестовый сгененрированный кошелек. 
     
-    <aside>
-    💡 Не забываем сохранять пароли и Ключи (UTC--…)
-    </aside>
+Для этого: 
+- в `Metamask` `Импортировать счет` Выбрать тип `Файл JSON` 
     
-    ✅Нужно 2 кошелька эфириум - для ревардов и тестовый, для удобства добавляем в основной кошелек Метамаск наш тестовый сгененрированный кошелек. 
+- Выбираем ключ из каталога `../keystore` (пример: `UTC--2021-01-18T11-36-28.705754426Z--b3ff24f818b0ff6cc50de951bcb8f86b52287dac`) 
     
-    ✅Для этого в `Metamask` `Импортировать счет` Выбрать тип `Файл JSON` 
+- Вводим пароль (`pwd.txt`)
     
-    ✅Выбираем Ключ из каталога `.../keystore` `example: UTC--2021-01-18T11-36-28.705754426Z--b3ff24f818b0ff6cc50de951bcb8f86b52287dac` 
+- Ждем минут 10
+
+## Создаем валидатора
+Переходим на сайт [`https://hq.qtestnet.org/`](https://hq.qtestnet.org/), коннектим тестовый кошелек`Connect to Q Testnet` 
     
-    ✅ Вводим пароль (`pwd.txt`)
+Включаем `Advanced mode`, переходим в `Validator Staiking`, вводим количество `Amount` и стейкаем `Stake to Ranking`, после чего присоединяемся `Join Validator Ranking`   
     
-    ✅Ждем минут 10
+Монеты получаем из крана -  [Faucet](https://faucet.qtestnet.org/)
     
-### **Создаем валидатора**
+![Q.png](assets/Q.png)
     
-    ✅Переходим на сайт [`https://hq.qtestnet.org/`](https://hq.qtestnet.org/), коннектим тестовый кошелек`Connect to Q Testnet` 
+## Configure Setup
     
-    ✅Включаем `Advanced mode`, переходим в `Validator Staiking`, вводим количество `Amount` и стейкаем `Stake to Ranking`, после чего присоединяемся `Join Validator Ranking`   
+Редактируем файл `.env` 
     
-    ✅Монеты получаем из крана -  [Faucet](https://faucet.qtestnet.org/)
-    
-    ![Q.png](assets/Q.png)
-    
-### **Configure Setup**
-    
-    ✅ Редактируем файл `.env` 
-    
-    ```bash
+```bash
     cd $HOME/testnet-public-tools/testnet-validator/
     nano .env
     
     # сохранить и закрыть nano Ctrl+o enter Ctrl+x
-    ```
+```
     
-    в строчку `ADDRESS=`вставляем ваш адрес без 0x
-    в строчку `IP=` вставляем ваш ip
+в строчку `ADDRESS=`вставляем ваш адрес без 0x
+
+в строчку `IP=` вставляем ваш ip
+
+![1.png](assets/1.png)
     
-    ![1.png](assets/1.png)
+Редактируем файл `config.json`
     
-    ✅ Редактируем файл `config.json`
-    
-    ```bash
+```bash
     cd $HOME/testnet-public-tools/testnet-validator/
     nano config.json
     
     # сохранить и закрыть nano Ctrl+o enter Ctrl+x
-    ```
+```
     
-    в строчку `"address":` в кавычки вставляем ваш адрес без 0x
-    в строчку `"password":` в кавычки вставляем ваш пароль который вписывали в `pwd.txt`
+в строчку `"address":` в кавычки вставляем ваш адрес без 0x
+в строчку `"password":` в кавычки вставляем ваш пароль который вписывали в `pwd.txt`
     
-    ### Регистрируем валидатора
+## Регистрируем валидатора
     
-    ✅ Заполняем форму - [https://itn.qdev.li/](https://itn.qdev.li/)
+Заполняем форму - [https://itn.qdev.li/](https://itn.qdev.li/)
     
-    ✅ Записываем Имя валидатора - его нужно будет вставить в `docker-compose.yaml`
+Записываем Имя валидатора - его нужно будет вставить в `docker-compose.yaml`
     
-    ![2.png](assets/2.png)
+![2.png](assets/2.png)
     
-    ✅ Редактируем файл `docker-compose.yaml` 
+Редактируем файл `docker-compose.yaml` 
     
-    ```bash
+```bash
     cd $HOME/testnet-public-tools/testnet-validator/
     nano docker-compose.yaml
-    ```
+```
     
-    ✅ Удаляем всё (удалить строчку целиком `Ctrl+k` ). Вставляем как ниже и изменяем Имя валдатора на свое в строке `"--ethstats=`
+Удаляем всё (удалить строчку целиком `Ctrl+k` ). Вставляем как ниже и изменяем Имя валидатора на свое в строке `"--ethstats=`
     
-    ```bash
+```bash
     version: "3"
     
     services:
@@ -224,26 +230,26 @@ Ctrl+o enter Ctrl+x
       testnet-validator-node-data:
     
     # сохранить и закрыть nano Ctrl+o enter Ctrl+x
-    ```
+```
     
-    ### Запускаем ноду
+## Запускаем ноду
     
-    ```bash
+```bash
     cd $HOME/testnet-public-tools/testnet-validator/
     docker-compose up -d
-    ```
+```
     
-    Посмотреть логи 
+Посмотреть логи 
     
-    ```bash
+```bash
     docker-compose logs -f --tail "100"
-    ```
+```
     
-    ### Обязательное обновление - выполнить сразу после запуска ноды
+## Обязательное обновление - выполнить сразу после запуска ноды
     
-    На блоке **3,699,041**  сеть перестает синхронизацию, поэтому чтобы его “проскачить” в  консоле необходимо ввести команду ниже и перезагрузить ноду с сбросом базы 
+На блоке **3,699,041**  сеть перестает синхронизацию, поэтому чтобы его “проскачить” в  консоле необходимо ввести команду ниже и перезагрузить ноду с сбросом базы 
     
-    ```bash
+```bash
     cd $HOME/testnet-public-tools/testnet-validator/
     
     # переходим в консоль
@@ -256,4 +262,4 @@ Ctrl+o enter Ctrl+x
     
     # перезагружаем ноду
     docker-compose down -v && docker-compose up -d
-    ```
+```
