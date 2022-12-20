@@ -1,6 +1,5 @@
 # Q Testnet node installation guide 
 
-auth by: @nil1oki @ryssroad
 
 <details><summary>Official links</summary>
   
@@ -263,3 +262,8 @@ docker-compose run --rm --entrypoint "geth account new --datadir=/data --passwor
     # перезагружаем ноду
     docker-compose down -v && docker-compose up -d
 ```
+
+## Special thanks
+
+[@nil1oki](https://github.com/nil1oki) - creating, 
+[@road](https://github.com/ryssroad) -formatting
