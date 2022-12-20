@@ -243,9 +243,9 @@ docker-compose run --rm --entrypoint "geth account new --datadir=/data --passwor
     docker-compose logs -f --tail "100"
 ```
     
-## Обязательное обновление - выполнить сразу после запуска ноды
+## Баг на блоке 3,699,041
     
-На блоке **3,699,041**  сеть перестает синхронизироваться, поэтому чтобы его “проскочить” в  консоли необходимо ввести команду ниже и перезагрузить ноду со сбросом базы 
+На блоке **3,699,041**  сеть перестает синхронизироваться, поэтому чтобы его “проскочить” в  консоли необходимо ввести команду ниже и перезагрузить ноду  
     
 ```bash
     cd $HOME/testnet-public-tools/testnet-validator/
@@ -259,7 +259,7 @@ docker-compose run --rm --entrypoint "geth account new --datadir=/data --passwor
     # закрыть консоль: ctrl+d или exit 
     
     # перезагружаем ноду
-    docker-compose down -v && docker-compose up -d
+    docker-compose down && docker-compose up -d
 ```
 
 ## Работа с нодой
