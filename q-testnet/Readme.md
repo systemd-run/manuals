@@ -56,26 +56,8 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
   
 </details>
-</br>
-
-<details><summary>Подготовка сервера при необходимости</summary>
-</br>
-
-> Данный блок НЕ является обязательным, думайте головой )
-
-```bash
-# обновление 
-apt update && apt upgrade -y
-        
-# установка необходимых утилит
-apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
-        
-# установка docker
-curl -fsSL https://get.docker.com -o get-docker.sh
-sh get-docker.sh
-```
-</details>        
-    
+</br>        
+ 
 ## Установка
     
 Клонируем репозиторий и переходим в каталог /testnet-validator
