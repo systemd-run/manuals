@@ -13,3 +13,6 @@
 [submodule "quark-tasks"]
 	path = quark-tasks
 	url = https://github.com/systemd-run/quark-tasks
+[submodule "near_blacklist"]
+	path = near_blacklist
+	url = https://github.com/encipher88/near_blacklist
