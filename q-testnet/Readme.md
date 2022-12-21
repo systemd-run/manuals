@@ -58,6 +58,13 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 </details>
 </br>        
  
+ ## Минимальные характеристики сервера
+• 6 Cores
+
+• 8 GB RAM
+
+• 250 GB SSD
+ 
 ## Установка
     
 Клонируем репозиторий и переходим в каталог /testnet-validator
