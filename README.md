@@ -17,3 +17,5 @@
 
 ### archived
 [. quark-tasks](https://github.com/systemd-run/quark-tasks/tree/0882210c5ada730acf854f5827dac00ca99e5e1b)
+
+[. near blacklist](https://github.com/encipher88/near_blacklist/tree/8f949f3aa1d20fc247ce4ed4547479ad22c0f4e5)
