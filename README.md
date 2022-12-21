@@ -1,6 +1,6 @@
 ## manuals by systemd
 
-### Nodes
+### nodes
 
 [. namada](https://github.com/systemd-run/manuals/tree/main/namada)
 
@@ -8,9 +8,12 @@
 
 [.. XX Network](https://github.com/ryssroad/xx-network/tree/9d26f92743bcd9f35102d5abccd161525e6bbac6)
 
-### Tools
+### tools
 [. LVM on Hentzner 1](https://github.com/ryssroad/lvm-on-hetzner/tree/22538730fbc442d01d28d9fad09c363e51f895e2)
 
 [. Pingpub on Vercel](https://github.com/ryssroad/vercel-ppub/tree/64c05590def946f317715692443e6aee860e8bf3)
 
 [. cheatsheets](https://github.com/ryssroad/cheatsheets/tree/288baef931a274ec16f1f2adc2893362252aa811)
+
+### archived
+[. quark-tasks](https://github.com/systemd-run/quark-tasks/tree/0882210c5ada730acf854f5827dac00ca99e5e1b)

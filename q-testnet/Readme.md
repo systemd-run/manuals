@@ -56,30 +56,16 @@ Security Audit - [https://medium.com/q-blockchain/q-system-contracts-security-au
 [https://docs.qtestnet.org/how-to-setup-validator/](https://docs.qtestnet.org/how-to-setup-validator/)
   
 </details>
-</br>
+</br>        
+ 
+ ## Минимальные характеристики сервера
+• 6 Cores
 
-## Подготовка сервера при необходимости
-</br>
+• 8 GB RAM
 
-```bash
-# обновление 
-apt update && apt upgrade -y
-        
-# установка необходимых утилит
-apt install curl iptables build-essential git wget jq make gcc nano tmux htop nvme-cli pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev -y
-        
-# установка docker одной строкой
-. <(wget -qO- https://raw.githubusercontent.com/SecorD0/utils/main/installers/docker.sh)
-        
-# обновление docker-copmose до v2.5.0
-apt purge docker-compose -y
-curl -L https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
-        
-    
-## Начало
+• 250 GB SSD
+ 
+## Установка
     
 Клонируем репозиторий и переходим в каталог /testnet-validator
     
