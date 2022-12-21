@@ -25,7 +25,7 @@ if ! [ -x "$(command -v go)" ]; then
   source ~/.bash_profile
 fi
 #Setting up vars
-echo "export NAMADA_TAG=v0.12.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
 echo "export VALIDATOR_ALIAS=change_your_validator_name" >> ~/.bash_profile
