@@ -113,4 +113,4 @@ echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 #waiting more than 2 epoch and check your status
 namada client bonded-stake
 
-```bash
+```
