@@ -57,7 +57,7 @@ After=network-online.target
 User=root
 WorkingDirectory=$HOME/.namada
 Environment=NAMADA_LOG=debug
-Environment=ANOMA_TM_STDOUT=true
+Environment=NAMADA_TM_STDOUT=true
 ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run 
 StandardOutput=syslog
 StandardError=syslog
@@ -112,5 +112,19 @@ echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 
 #waiting more than 2 epoch and check your status
 namada client bonded-stake
+
+#UPDATE for new release
+cd $HOME/namada
+NEWTAG=v0.12.2
+git fetch
+git checkout $NEWTAG
+make build-release
+cd $HOME && sudo systemctl stop namadad
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+sudo systemctl restart namadad
+namada --version
+sudo journalctl -u namadad -f -o cat
+
 
 ```
