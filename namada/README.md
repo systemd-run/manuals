@@ -24,11 +24,17 @@ if ! [ -x "$(command -v go)" ]; then
   echo "export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin" >> ~/.bash_profile
   source ~/.bash_profile
 fi
+
 #Setting up vars
+
 echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
+
+#***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
 echo "export VALIDATOR_ALIAS=change_your_validator_name" >> ~/.bash_profile
+echo "export WALLET=change_your_wallet_name" >> ~/.bash_profile
+
 source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
@@ -77,9 +83,19 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #Make wallet and run validator
 cd $HOME
-namada wallet address gen --alias wallet_name
+namada wallet address gen --alias $WALLET
+
+namadac transfer \
+    --token NAM \
+    --amount 1000 \
+    --source faucet \
+    --target $WALLET \
+    --signer $WALLET
+  
 #enter pass
-namada client init-validator --alias $VALIDATOR_ALIAS --source wallet_name --commission-rate 0.05 --max-commission-rate-change 0.01
+
+namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commission-rate 0.05 --max-commission-rate-change 0.01 --gas-limit 10000000
+
 #enter pass
 
 cd $HOME
@@ -104,7 +120,8 @@ namada client balance --owner $VALIDATOR_ALIAS --token NAM
 #stake your funds
 namada client bond \
   --validator $VALIDATOR_ALIAS \
-  --amount 1500
+  --amount 1500 \
+  --gas-limit 10000000
   
 #print your validator address
 export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-1.0.05ab4adb9db/wallet.toml" | grep address`
