@@ -16,3 +16,6 @@
 [submodule "near_blacklist"]
 	path = near_blacklist
 	url = https://github.com/encipher88/near_blacklist
+[submodule "bundlr_nft"]
+	path = bundlr_nft
+	url = https://github.com/systemd-run/bundlr_nft
