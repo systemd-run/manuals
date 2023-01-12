@@ -27,9 +27,9 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.13.0" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-2.0.2feaf2d718c" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
 echo "export VALIDATOR_ALIAS=change_your_validator_name" >> ~/.bash_profile
@@ -51,8 +51,8 @@ namada --version
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-1.0.05ab4adb9db/public-testnet-1.0.05ab4adb9db.tar.gz
-tar xvzf "$HOME/public-testnet-1.0.05ab4adb9db.tar.gz"
+cd $HOME && wget https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.0.2feaf2d718c/public-testnet-2.0.2feaf2d718c.tar.gz
+tar xvzf "$HOME/public-testnet-2.0.2feaf2d718c.tar.gz"
 
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
@@ -124,7 +124,7 @@ namada client bond \
   --gas-limit 10000000
   
 #print your validator address
-export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-1.0.05ab4adb9db/wallet.toml" | grep address`
+export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-2.0.2feaf2d718c/wallet.toml" | grep address`
 echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 
 #waiting more than 2 epoch and check your status
