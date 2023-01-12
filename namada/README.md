@@ -3,7 +3,8 @@
 #install update and libs
 cd $HOME
 sudo apt update && sudo apt upgrade -y
-sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
+sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev -y
+sudo apt install jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
 sudo apt install -y uidmap dbus-user-session
 
 
@@ -27,13 +28,13 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.12.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.13.0" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-1.0.05ab4adb9db" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-2.0.2feaf2d718c" >> ~/.bash_profile
+echo "export WALLET=wallet" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
-echo "export VALIDATOR_ALIAS=change_your_validator_name" >> ~/.bash_profile
-echo "export WALLET=change_your_wallet_name" >> ~/.bash_profile
+echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
 
 source ~/.bash_profile
 
@@ -51,8 +52,8 @@ namada --version
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-1.0.05ab4adb9db/public-testnet-1.0.05ab4adb9db.tar.gz
-tar xvzf "$HOME/public-testnet-1.0.05ab4adb9db.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.0.2feaf2d718c/public-testnet-2.0.2feaf2d718c.tar.gz"
+tar xvzf "$HOME/public-testnet-2.0.2feaf2d718c.tar.gz"
 
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
@@ -79,21 +80,24 @@ sudo systemctl daemon-reload
 sudo systemctl enable namadad
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
-#waiting full synchronization then ctrl+c
+#waiting full synchronization
+
+# check "catching_up": false  --- is OK
+curl -s localhost:26657/status
 
 #Make wallet and run validator
+
 cd $HOME
 namada wallet address gen --alias $WALLET
 
-namadac transfer \
-    --token NAM \
-    --amount 1000 \
-    --source faucet \
-    --target $WALLET \
-    --signer $WALLET
-  
-#enter pass
+namada client transfer \
+  --source faucet \
+  --target $WALLET \
+  --token NAM \
+  --amount 1000 \
+  --signer $WALLET
 
+cd $HOME
 namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commission-rate 0.05 --max-commission-rate-change 0.01 --gas-limit 10000000
 
 #enter pass
@@ -124,7 +128,7 @@ namada client bond \
   --gas-limit 10000000
   
 #print your validator address
-export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-1.0.05ab4adb9db/wallet.toml" | grep address`
+export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-2.0.2feaf2d718c/wallet.toml" | grep address`
 echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 
 #waiting more than 2 epoch and check your status
@@ -132,7 +136,7 @@ namada client bonded-stake
 
 #UPDATE for new release
 cd $HOME/namada
-NEWTAG=v0.12.2
+NEWTAG=v0.13.0
 git fetch
 git checkout $NEWTAG
 make build-release
@@ -142,6 +146,5 @@ cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp 
 sudo systemctl restart namadad
 namada --version
 sudo journalctl -u namadad -f -o cat
-
 
 ```
