@@ -55,6 +55,11 @@ cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.0.2feaf2d718c/public-testnet-2.0.2feaf2d718c.tar.gz"
 tar xvzf "$HOME/public-testnet-2.0.2feaf2d718c.tar.gz"
 
+#add  peers
+rm "$HOME/.namada/public-testnet-2.0.2feaf2d718c/tendermint/config/addrbook.json"
+curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.0.2feaf2d718c/tendermint/config/addrbook.json
+
+#Make service 
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
 Description=namada
