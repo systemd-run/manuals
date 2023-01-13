@@ -147,4 +147,13 @@ sudo systemctl restart namadad
 namada --version
 sudo journalctl -u namadad -f -o cat
 
+
+#DELETE NODE!!!
+systemctl stop namadad && systemctl disable namadad
+rm /etc/systemd/system/namadad* -rf
+rm $(which namadad) -rf
+rm $HOME/.namada* -rf
+rm $HOME/namada -rf
+rm $HOME/tendermint -rf
+
 ```
