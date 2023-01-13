@@ -113,7 +113,7 @@ namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commiss
 #enter pass
 
 cd $HOME
-namadac transfer \
+namada client transfer \
     --token NAM \
     --amount 1000 \
     --source faucet \
@@ -121,7 +121,7 @@ namadac transfer \
     --signer $VALIDATOR_ALIAS
 	
 #use faucet again because min stake 1000 and you need some more NAM
-namadac transfer \
+namada client transfer \
     --token NAM \
     --amount 1000 \
     --source faucet \
