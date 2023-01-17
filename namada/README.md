@@ -155,6 +155,8 @@ sudo systemctl restart namadad
 namada --version
 sudo journalctl -u namadad -f -o cat
 
+#check only height logs
+sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
 #DELETE NODE!!!
 systemctl stop namadad && systemctl disable namadad
