@@ -144,7 +144,7 @@ namada client bonded-stake
 
 #UPDATE for new release
 cd $HOME/namada
-NEWTAG=v0.13.0
+NEWTAG=v0.13.1-hardfork
 git fetch
 git checkout $NEWTAG
 make build-release
