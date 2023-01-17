@@ -57,12 +57,11 @@ tar xvzf "$HOME/public-testnet-2.0.2feaf2d718c.tar.gz"
 
 
 
-#Make service 
+#Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
 Description=namada
 After=network-online.target
-
 [Service]
 User=root
 WorkingDirectory=$HOME/.namada
@@ -71,10 +70,9 @@ Environment=NAMADA_TM_STDOUT=true
 ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run 
 StandardOutput=syslog
 StandardError=syslog
-Restart=on-failure
-RestartSec=3
+Restart=always
+RestartSec=10
 LimitNOFILE=65535
-
 [Install]
 WantedBy=multi-user.target
 EOF
