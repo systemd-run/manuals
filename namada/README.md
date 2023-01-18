@@ -43,7 +43,7 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.13.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.13.1-hardfork" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-2.0.2feaf2d718c" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
