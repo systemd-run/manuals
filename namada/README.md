@@ -1,4 +1,4 @@
-##UPDATE for new release
+## UPDATE for new release
 ```bash
 cd $HOME/namada
 NEWTAG=v0.13.1-hardfork
