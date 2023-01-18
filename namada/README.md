@@ -1,3 +1,18 @@
+##UPDATE for new release
+```bash
+cd $HOME/namada
+NEWTAG=v0.13.1-hardfork
+git fetch
+git checkout $NEWTAG
+make build-release
+cd $HOME && sudo systemctl stop namadad
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+sudo systemctl restart namadad
+namada --version
+sudo journalctl -u namadad -f -o cat
+```
+
 ## namada setup
 ```bash
 #install update and libs
@@ -142,18 +157,7 @@ echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 #waiting more than 2 epoch and check your status
 namada client bonded-stake
 
-#UPDATE for new release
-cd $HOME/namada
-NEWTAG=v0.13.1
-git fetch
-git checkout $NEWTAG
-make build-release
-cd $HOME && sudo systemctl stop namadad
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
-sudo systemctl restart namadad
-namada --version
-sudo journalctl -u namadad -f -o cat
+
 
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
