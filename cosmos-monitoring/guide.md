@@ -104,7 +104,7 @@ Download config `telegraf.conf`
 ```Bash
 sudo mv /etc/telegraf/telegraf.conf /etc/telegraf/telegraf.conf.bak
 sudo mv /etc/telegraf/telegraf.conf.sample /etc/telegraf/telegraf.conf.sample.bak
-wget -O telegraf.conf https://raw.githubusercontent.com/glukosseth/testnet_guide/main/cosmos/usefull_for_cosmos/monitoring/telegraf.conf
+wget -O telegraf.conf https://raw.githubusercontent.com/systemd-run/manuals/main/cosmos-monitoring/telegraf.conf
 chmod +x telegraf.conf && sudo mv $HOME/telegraf.conf /etc/telegraf/telegraf.conf
 ```
 Open `telegraf.conf`
