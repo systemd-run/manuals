@@ -9,7 +9,7 @@ Grafana is an open source, feature rich metrics dashboard and graph editor for G
 
 ## 1. Install Telegraf, InfluxDB, Grafana
 
-For installation you can use this [guide](https://github.com/glukosseth/testnet_guide/blob/main/cosmos/usefull_for_cosmos/monitoring/install_guide.md)
+For installation you can use this [guide](https://github.com/systemd-run/manuals/blob/main/cosmos-monitoring/guide.md)
 
 ## 2. Configure Grafana
 
@@ -51,7 +51,7 @@ Under InfluxDB Details, provide:
 
 Once the data source has been added, the next thing is to import the dashboard. I customized one of the dashboards initially created by a user on the community and uploaded it.
 
-Download the dashboard from [here](https://raw.githubusercontent.com/glukosseth/testnet_guide/main/cosmos/usefull_for_cosmos/monitoring/cosmos.json), it is in JSON format. The head over to `Create > Import`:
+Download the dashboard from [here](https://raw.githubusercontent.com/systemd-run/manuals/main/cosmos-monitoring/cosmos.json), it is in JSON format. The head over to `Create > Import`:
 
 ![un7](https://user-images.githubusercontent.com/108256873/177771367-2c3bf456-fdef-4bf4-a036-b744141b7b4c.png)
 
