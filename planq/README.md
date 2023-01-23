@@ -300,6 +300,6 @@ You can see your transactions here:</br>
 https://www.mintscan.io/osmosis/relayers/channel-492 </br>
 https://www.mintscan.io/gravity-bridge/relayers/channel-102</br>
 https://www.mintscan.io/cosmos/relayers/channel-446</br>
-https://explorer.planq.network/accounts/<wallet_address></br>
+https://explorer.planq.network/accounts/<planq_wallet_address></br>
 
 Your address should appear in the "Operator Address" section (on mintscan). After sending transactions, it may take some time for it to appear there.
