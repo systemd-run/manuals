@@ -18,6 +18,15 @@ tar -C $HOME/.hermes/bin/ -vxzf hermes-v1.2.0-x86_64-unknown-linux-gnu.tar.gz
 echo 'export PATH="$HOME/.hermes/bin:$PATH"' >> $HOME/.bash_profile
 source $HOME/.bash_profile
 ```
+If "GLIBC... not found..." error is displayed install hermes from source:
+```
+git clone https://github.com/informalsystems/hermes.git
+cd hermes
+git checkout v1.2.0
+cargo build --release --bin hermes --locked
+chmod +x hermes/taget/release/hermes
+mv target/release/hermes /root/go/bin/
+```
 
 ## Create hermes config
 Generate hermes config file.
