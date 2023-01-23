@@ -2,7 +2,7 @@
 
 ### nodes
 
-[. namada - @encipher88](https://github.com/systemd-run/manuals/tree/main/namada)
+[. namada](https://github.com/systemd-run/manuals/tree/main/namada)
 
 [.. Q Testnet](https://github.com/systemd-run/manuals/tree/main/q-testnet)
 
