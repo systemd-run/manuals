@@ -97,7 +97,7 @@ list = [
   ['transfer', 'channel-0'], # gravitybridge
 ]
 
-############################################################### COSMOS ###############################################################
+############################################################### COSMOS ############################################################
 [[chains]]
 id = 'cosmoshub-4'
 rpc_addr = 'https://cosmos-rpc.polkachu.com:443'
@@ -127,7 +127,7 @@ list = [
   ['transfer', 'channel-446'], # Planq
 ]
 
-############################################################### OSMOSIS ###############################################################
+############################################################### OSMOSIS ############################################################
 [[chains]]
 id = 'osmosis-1'
 rpc_addr = 'https://osmosis-rpc.polkachu.com:443'
@@ -157,7 +157,7 @@ list = [
   ['transfer', 'channel-492'], # Planq
 ]
 
-############################################################### GRAVITY BRIDGE ###############################################################
+############################################################### GRAVITY BRIDGE ############################################################
 [[chains]]
 id = 'gravity-bridge-3'
 rpc_addr = 'https://gravity-rpc.polkachu.com:443'
@@ -271,28 +271,37 @@ sudo systemctl restart hermesd && journalctl -u hermesd -f -o cat
 ### Send Planq token from Planq to destination chain (osmosis, cosmos, gravity bridge):
 Osmosis:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain osmosis-1 --src-chain planq_7070-2 --src-port transfer --src-channel channel-1 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain osmosis-1 \
+--src-chain planq_7070-2 --src-port transfer --src-channel channel-1 --amount <amount planq> --denom aplanq
 ```
 Cosmos:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain cosmoshub-4 --src-chain planq_7070-2 --src-port transfer --src-channel channel-2 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain cosmoshub-4 \
+--src-chain planq_7070-2 --src-port transfer --src-channel channel-2 --amount <amount planq> --denom aplanq
 ```
 Gravity Bridge:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain gravity-bridge-3 --src-chain planq_7070-2 --src-port transfer --src-channel channel-0 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain gravity-bridge-3 \
+--src-chain planq_7070-2 --src-port transfer --src-channel channel-0 --amount <amount planq> --denom aplanq
 ```
 ### Send Planq token from Osmosis, Cosmos, Gravity Bridge to Planq:
 Osmosis:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain osmosis-1 --src-port transfer --src-channel channel-492 --amount <amount planq> --denom ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
+--src-chain osmosis-1 --src-port transfer --src-channel channel-492 --amount <amount planq> \
+--denom ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF
 ```
 Cosmos:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain cosmoshub-4 --src-port transfer --src-channel channel-446 --amount <amount planq> --denom ibc/1452F322F7B459CB7EC111AD5BD2404552B011375002C8C85BA615A95B9121CF
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
+--src-chain cosmoshub-4 --src-port transfer --src-channel channel-446 --amount <amount planq> \
+--denom ibc/1452F322F7B459CB7EC111AD5BD2404552B011375002C8C85BA615A95B9121CF
 ```
 Gravity Bridge:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain gravity-bridge-3 --src-port transfer --src-channel channel-102 --amount <amount planq> --denom ibc/2782B87D755389B565D59F15E202E6E3B8B3E1408034D2FAA4E02A0CA10911B2
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
+--src-chain gravity-bridge-3 --src-port transfer --src-channel channel-102 --amount <amount planq> \
+--denom ibc/2782B87D755389B565D59F15E202E6E3B8B3E1408034D2FAA4E02A0CA10911B2
 ```
 
 ## Check transaction
