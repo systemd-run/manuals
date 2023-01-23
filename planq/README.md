@@ -25,7 +25,7 @@ git clone https://github.com/informalsystems/hermes.git
 cd hermes
 git checkout v1.2.0
 cargo build --release --bin hermes --locked
-chmod +x hermes/taget/release/hermes
+chmod +x target/release/hermes
 mv target/release/hermes /root/go/bin/
 ```
 
