@@ -296,10 +296,10 @@ hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain pla
 ```
 
 ## Check transaction
-You can see your transactions here:
+You can see your transactions here:</br>
 https://www.mintscan.io/osmosis/relayers/channel-492 </br>
-https://www.mintscan.io/gravity-bridge/relayers/channel-102
-https://www.mintscan.io/cosmos/relayers/channel-446
-https://explorer.planq.network/accounts/<wallet_address>
+https://www.mintscan.io/gravity-bridge/relayers/channel-102</br>
+https://www.mintscan.io/cosmos/relayers/channel-446</br>
+https://explorer.planq.network/accounts/<wallet_address></br>
 
 Your address should appear in the "Operator Address" section (on mintscan). After sending transactions, it may take some time for it to appear there.
