@@ -320,18 +320,15 @@ sudo systemctl restart hermesd && journalctl -u hermesd -f -o cat
 ### Send Planq token from Planq to destination chain (osmosis, cosmos, gravity bridge):
 Osmosis:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain osmosis-1 \
---src-chain planq_7070-2 --src-port transfer --src-channel channel-1 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain osmosis-1 --src-chain planq_7070-2 --src-port transfer --src-channel channel-1 --amount <amount planq> --denom aplanq
 ```
 Cosmos:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain cosmoshub-4 \
---src-chain planq_7070-2 --src-port transfer --src-channel channel-2 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain cosmoshub-4 --src-chain planq_7070-2 --src-port transfer --src-channel channel-2 --amount <amount planq> --denom aplanq
 ```
 Gravity Bridge:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain gravity-bridge-3 \
---src-chain planq_7070-2 --src-port transfer --src-channel channel-0 --amount <amount planq> --denom aplanq
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain gravity-bridge-3 --src-chain planq_7070-2 --src-port transfer --src-channel channel-0 --amount <amount planq> --denom aplanq
 ```
 Umee:
 ```
@@ -340,21 +337,15 @@ hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain ume
 ### Send Planq token from Osmosis, Cosmos, Gravity Bridge to Planq:
 Osmosis:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
---src-chain osmosis-1 --src-port transfer --src-channel channel-492 --amount <amount planq> \
---denom ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain osmosis-1 --src-port transfer --src-channel channel-492 --amount <amount planq> --denom ibc/B1E0166EA0D759FDF4B207D1F5F12210D8BFE36F2345CEFC76948CE2B36DFBAF
 ```
 Cosmos:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
---src-chain cosmoshub-4 --src-port transfer --src-channel channel-446 --amount <amount planq> \
---denom ibc/1452F322F7B459CB7EC111AD5BD2404552B011375002C8C85BA615A95B9121CF
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain cosmoshub-4 --src-port transfer --src-channel channel-446 --amount <amount planq> --denom ibc/1452F322F7B459CB7EC111AD5BD2404552B011375002C8C85BA615A95B9121CF
 ```
 Gravity Bridge:
 ```
-hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 \
---src-chain gravity-bridge-3 --src-port transfer --src-channel channel-102 --amount <amount planq> \
---denom ibc/2782B87D755389B565D59F15E202E6E3B8B3E1408034D2FAA4E02A0CA10911B2
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain gravity-bridge-3 --src-port transfer --src-channel channel-102 --amount <amount planq> --denom ibc/2782B87D755389B565D59F15E202E6E3B8B3E1408034D2FAA4E02A0CA10911B2
 ```
 Umee:
 ```
@@ -366,6 +357,7 @@ You can see your transactions here:</br>
 https://www.mintscan.io/osmosis/relayers/channel-492 </br>
 https://www.mintscan.io/gravity-bridge/relayers/channel-102</br>
 https://www.mintscan.io/cosmos/relayers/channel-446</br>
+https://www.mintscan.io/umee/relayers/channel-41</br>
 https://explorer.planq.network/accounts/<planq_wallet_address></br>
 
 Your address should appear in the "Operator Address" section (on mintscan). After sending transactions, it may take some time for it to appear there.
