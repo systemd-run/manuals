@@ -38,6 +38,7 @@ rm $HOME/.hermes.mnemonic
 ```
 ## Создание IBC Client, Connection, Channel
 Здесь главное не запутаться и правильно подставлять полученные значения Client, Connection и Channel.
+
 При настройке IBC с новым чейном, нужно будет везде заменить kaiyo-1 на нужный chain id.
 
 Создаем новый IBC Client:
