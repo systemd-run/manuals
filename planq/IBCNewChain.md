@@ -94,17 +94,17 @@ hermes tx chan-open-init --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-conn
 ```
 В консоле отобразится созданный Channel вида: channel-51
 
-2. Создание Channel между Kujira и Planq со стороны Planq, подставляя ранее полученное значение connection и значение Channel (на предыдущем шагу):
+2. Создание Channel между Kujira и Planq со стороны Planq, подставляя ранее полученные значение connection и значение Channel (на предыдущем шаге):
 ```
 hermes tx chan-open-try --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-connection connection-151 --dst-port transfer --src-port transfer --src-channel channel-51
 ```
 В консоле отобразится созданный Channel вида: channel-23
 
-3. Подтверждаем создание Channel в первоначальном чейне, подставляя значения Channel и Connection, полученные на предыдущим шагах:
+3. Подтверждаем создание Channel в первоначальном чейне, подставляя значения Channel и Connection, полученные на предыдущих шагах:
 ```
 hermes tx chan-open-ack --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-connection connection-46 --dst-port transfer --src-port transfer --dst-channel channel-51 --src-channel channel-23
 ```
-4. Подтверждаем создание и открытие Channel, подставляя значения Channel и Connection, полученные на предыдущим шагах:
+4. Подтверждаем создание и открытие Channel, подставляя значения Channel и Connection, полученные на предыдущих шагах:
 ```
 hermes tx chan-open-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-connection connection-151 --dst-port transfer --src-port transfer --dst-channel channel-23 --src-channel channel-51
 ```
