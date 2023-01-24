@@ -25,6 +25,7 @@ trusting_period = '10days'
 memo_prefix = 'Relayed by cagie'
 trust_threshold = { numerator = '1', denominator = '3' }
 ```
+Конфиги для различных сетей можно найти на github.
 ## Добавление кошелька Umee
 Восстанавливаем Umee кошелек:
 ```
