@@ -36,7 +36,7 @@ I[2023-01-24|09:37:17.504] service start                                module=m
 I[2023-01-24|09:37:17.504] Genesis time is in the future. Sleeping until then... module=main genTime="2023-01-24 17:00:00 +0000 UTC"
 ```
 
-## namada setup
+## namada setup  
 ```bash
 #install update and libs
 cd $HOME
