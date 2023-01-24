@@ -22,11 +22,11 @@ max_tx_size = 2000000
 clock_drift = '45s'
 max_block_time = '10s'
 trusting_period = '10days'
-memo_prefix = 'Relayed by cagie'
+memo_prefix = 'Relayed by '
 trust_threshold = { numerator = '1', denominator = '3' }
 ```
 Конфиги для различных сетей можно найти на github.
-## Добавление кошелька Umee
+## Добавление кошелька Kujira
 Восстанавливаем Umee кошелек:
 ```
 MNEMONIC='...'
