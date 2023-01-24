@@ -1,16 +1,35 @@
 ## UPDATE for new release
 ```bash
+
 cd $HOME/namada
-NEWTAG=v0.13.1-hardfork
-git fetch
-git checkout $NEWTAG
+
+NEWTAG=v0.13.2
+
+git fetch && git checkout $NEWTAG
+
 make build-release
+
 cd $HOME && sudo systemctl stop namadad
+
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
-sudo systemctl restart namadad
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+
 namada --version
-sudo journalctl -u namadad -f -o cat
+
+## Output
+Namada v0.13.2
+
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.1.4014f207f6d/public-testnet-2.1.4014f207f6d.tar.gz"
+
+tar xvzf "$HOME/public-testnet-2.1.4014f207f6d.tar.gz"
+
+namada client utils join-network --chain-id public-testnet-2.1.4014f207f6d
+
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 ```
 
 ## namada setup
