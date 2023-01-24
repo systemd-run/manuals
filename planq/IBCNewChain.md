@@ -133,7 +133,7 @@ list = [
 ]
 ```
 
-Перезагружаем Hermes, смотрим, что все нормально стартануло6
+Перезагружаем Hermes, смотрим, что все нормально стартануло:
 ```
 sudo systemctl restart hermesd && journalctl -u hermesd -f -o cat
 ```
@@ -143,7 +143,7 @@ sudo systemctl restart hermesd && journalctl -u hermesd -f -o cat
 hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain kaiyo-1 --src-chain planq_7070-2 --src-port transfer --src-channel channel-23 --amount <ammount planq> --denom aplanq
 ```
 Отправляем транзацию из Kujira в Planq.</br>
-Предварительно нам нужно узнать denom монеты Planq в сети Kujira. Узнать можно, например, в эксплорере, denom вида ibc/F2A6A3D4C02E003CC3EDB84CFD1C6F8F0E21EE6815575C5FE82FAC7D96106239.
+Предварительно нам нужно узнать denom монеты Planq в сети Kujira. Узнать можно, например, в эксплорере, посмотрев баланс своего кошелька, denom вида ibc/F2A6A3D4C02E003CC3EDB84CFD1C6F8F0E21EE6815575C5FE82FAC7D96106239.
 При это denom чувтсвителен к регистру, приставка "ibc" должна быть указана строчными буквами.
 Пример транзации:
 ```
