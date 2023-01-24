@@ -292,6 +292,13 @@ echo "$MNEMONIC" > $HOME/.hermes.mnemonic
 hermes keys add --chain "$CHAIN_ID" --mnemonic-file $HOME/.hermes.mnemonic
 rm $HOME/.hermes.mnemonic
 ```
+## Enabling an index on a Planq node
+
+An index must be included on the Planq node (index = "kv").
+To enable the index, use the command:
+```
+sed -i -e 's|^indexer *=.*|indexer = "kv"|' $HOME/.planqd/config/config.toml
+```
 ## Create hermes service daemon
 ```
 sudo tee /etc/systemd/system/hermesd.service > /dev/null <<EOF
