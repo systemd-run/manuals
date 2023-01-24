@@ -30,6 +30,10 @@ tar xvzf "$HOME/public-testnet-2.1.4014f207f6d.tar.gz"
 namada client utils join-network --chain-id public-testnet-2.1.4014f207f6d
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+
+## Output
+I[2023-01-24|09:37:17.504] service start                                module=main msg="Starting Node service" impl=Node
+I[2023-01-24|09:37:17.504] Genesis time is in the future. Sleeping until then... module=main genTime="2023-01-24 17:00:00 +0000 UTC"
 ```
 
 ## namada setup
