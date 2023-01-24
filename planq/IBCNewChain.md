@@ -90,13 +90,13 @@ hermes tx conn-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-client
 Более подробно и со схемой см. здесь: https://hermes.informal.systems/documentation/commands/tx/connection.html
 
 Создаем новые Channel между Planq и Kujira:
-1. Создание Channel между Kujira и Planq со стороны Kujira, подставляя ранее полученное значение connection:
+1. Создаем Channel между Kujira и Planq со стороны Kujira, подставляя ранее полученное значение connection:
 ```
 hermes tx chan-open-init --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-connection connection-46 --dst-port transfer --src-port transfer
 ```
 В консоле отобразится созданный Channel вида: channel-51
 
-2. Создание Channel между Kujira и Planq со стороны Planq, подставляя ранее полученные значение connection и значение Channel (на предыдущем шаге):
+2. Создаем Channel между Kujira и Planq со стороны Planq, подставляя ранее полученные значение connection и значение Channel (на предыдущем шаге):
 ```
 hermes tx chan-open-try --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-connection connection-151 --dst-port transfer --src-port transfer --src-channel channel-51
 ```
