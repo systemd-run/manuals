@@ -260,7 +260,6 @@ list = [
 ]
 
 EOF
-EOF
 ```
 
 ## Verify hermes configuration is correct
