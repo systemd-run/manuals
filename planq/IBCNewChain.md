@@ -27,7 +27,7 @@ trust_threshold = { numerator = '1', denominator = '3' }
 ```
 Конфиги для различных сетей можно найти на github.
 ## Добавление кошелька Kujira
-Восстанавливаем Umee кошелек:
+Восстанавливаем Kujira кошелек:
 ```
 MNEMONIC='...'
 CHAIN_ID=kaiyo-1
