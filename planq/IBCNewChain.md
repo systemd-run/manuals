@@ -45,7 +45,7 @@ rm $HOME/.hermes.mnemonic
 hermes create client --host-chain kaiyo-1 --reference-chain planq_7070-2
 ```
 </br>
-В консоле отобразится созданный клиент вида: 07-tendermint-70</br>
+В консоле отобразится созданный клиент вида: 07-tendermint-70
 2. Для Planq:
 ```
 hermes create client --host-chain planq_7070-2 --reference-chain kaiyo-1
