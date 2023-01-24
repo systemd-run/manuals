@@ -116,13 +116,13 @@ hermes tx chan-open-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-c
 ```
 nano .hermes/config.toml
 ```
-В блоке настройками Planq в [chains.packet_filter] добавить следующее:
+В блоке с настройками Planq в [chains.packet_filter] добавить следующее:
 ```
   ['transfer', 'channel-23'], # kujira
 ```
 Т.е. указываем, полученный ранее канал.
 
-В блоке настройками Kujira в [chains.packet_filter] добавить следующее:
+В блоке с настройками Kujira добавить следующее:
 ```
 [chains.packet_filter]
 policy = 'allow'
