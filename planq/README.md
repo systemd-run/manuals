@@ -106,6 +106,7 @@ list = [
   ['transfer', 'channel-1'], # osmosis
   ['transfer', 'channel-0'], # gravitybridge
   ['transfer', 'channel-22'], # umee
+  ['transfer', 'channel-23'], # kujira
 ]
 
 ############################################################### COSMOS ##########################################################
@@ -227,6 +228,38 @@ policy = 'allow'
 list = [
   ['transfer', 'channel-41'], # Planq
 ]
+
+############################################################### KUJIRA ###############################################################
+[[chains]]
+id = 'kaiyo-1'
+rpc_addr = 'https://kujira-rpc.polkachu.com:443'
+grpc_addr = 'http://kujira-grpc.polkachu.com:11890'
+websocket_addr = 'wss://rpc-kujira.starsquid.io:443/websocket'
+
+rpc_timeout = '20s'
+account_prefix = 'kujira'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas = 2000000
+gas_price = { price = 0.00125, denom = 'ukuji' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2000000
+clock_drift = '45s'
+max_block_time = '10s'
+trusting_period = '10days'
+memo_prefix = 'Relayed by'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-51'], # Planq
+]
+
+EOF
 EOF
 ```
 
@@ -292,6 +325,16 @@ echo "$MNEMONIC" > $HOME/.hermes.mnemonic
 hermes keys add --chain "$CHAIN_ID" --mnemonic-file $HOME/.hermes.mnemonic
 rm $HOME/.hermes.mnemonic
 ```
+
+Add Kujira wallet to Hermes:
+```
+MNEMONIC='...'
+CHAIN_ID=kaiyo-1
+
+echo "$MNEMONIC" > $HOME/.hermes.mnemonic
+hermes keys add --chain "$CHAIN_ID" --mnemonic-file $HOME/.hermes.mnemonic
+rm $HOME/.hermes.mnemonic
+```
 ## Enabling an index on a Planq node
 
 An index must be included on the Planq node (index = "kv").
@@ -341,6 +384,10 @@ Umee:
 ```
 hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain umee-1 --src-chain planq_7070-2 --src-port transfer --src-channel channel-22 --amount <amount planq> --denom aplanq
 ```
+Kujira:
+```
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain kaiyo-1 --src-chain planq_7070-2 --src-port transfer --src-channel channel-23 --amount <amount planq> --denom aplanq
+```
 ### Send Planq token from Osmosis, Cosmos, Gravity Bridge to Planq:
 Osmosis:
 ```
@@ -357,6 +404,10 @@ hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain pla
 Umee:
 ```
 hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain umee-1 --src-port transfer --src-channel channel-41 --amount <amount planq> --denom ibc/AFD3377FA11440EE2C0A876C618F32EF3A55308536F9C316A37AB362B1343E7A
+```
+Kujira:
+```
+hermes tx ft-transfer --timeout-height-offset 10 --number-msgs 1 --dst-chain planq_7070-2 --src-chain kaiyo-1 --src-port transfer --src-channel channel-51 --amount <amount planq> --denom ibc/F2A6A3D4C02E003CC3EDB84CFD1C6F8F0E21EE6815575C5FE82FAC7D96106239
 ```
 
 ## Check transaction
