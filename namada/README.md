@@ -52,7 +52,8 @@ cd $HOME
   . $HOME/.cargo/env
   curl https://deb.nodesource.com/setup_16.x | sudo bash
   sudo apt install cargo nodejs -y < "/dev/null"
-
+  cargo --version
+  
 if ! [ -x "$(command -v go)" ]; then
   ver="1.19.4"
   cd $HOME
@@ -66,9 +67,9 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.13.1-hardfork" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.13.2" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-2.0.2feaf2d718c" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-2.1.4014f207f6d" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
@@ -78,22 +79,21 @@ source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
-cargo --version
+
 
 cd $HOME && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git checkout $TM_HASH
 make build
 
 cd $HOME && cp $HOME/tendermint/build/tendermint  /usr/local/bin/tendermint && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+
 tendermint version
 namada --version
 
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.0.2feaf2d718c/public-testnet-2.0.2feaf2d718c.tar.gz"
-tar xvzf "$HOME/public-testnet-2.0.2feaf2d718c.tar.gz"
-
-
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.1.4014f207f6d/public-testnet-2.1.4014f207f6d.tar.gz"
+tar xvzf "$HOME/public-testnet-2.1.4014f207f6d.tar.gz"
 
 #Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
@@ -120,11 +120,11 @@ sudo systemctl enable namadad
 sudo systemctl start namadad
 
 #add  peers
-cd $HOME
-sudo systemctl stop namadad
-rm "$HOME/.namada/public-testnet-2.0.2feaf2d718c/tendermint/config/addrbook.json"
-curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.0.2feaf2d718c/tendermint/config/addrbook.json
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+#cd $HOME
+#sudo systemctl stop namadad
+#rm "$HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json"
+#curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json
+#sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #waiting full synchronization
 
@@ -174,7 +174,7 @@ namada client bond \
   --gas-limit 10000000
   
 #print your validator address
-export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-2.0.2feaf2d718c/wallet.toml" | grep address`
+export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-2.1.4014f207f6d/wallet.toml" | grep address`
 echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 
 #waiting more than 2 epoch and check your status
