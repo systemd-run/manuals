@@ -69,10 +69,13 @@ hermes update client --host-chain planq_7070-2 --client 07-tendermint-144
 hermes tx conn-init --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-client 07-tendermint-70 --src-client 07-tendermint-144
 ```
 В консоле отобразится созданный Connection вида: connection-46
+
 2. Создаем Connection между Kujira и Planq со стороны Planq, подставляя значение connection, полученное на предыдущем шаге:
 ```
 hermes tx conn-try --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-client 07-tendermint-144 --src-client 07-tendermint-70 --src-connection connection-46
 ```
+В консоле отобразится созданный Connection вида: connection-151
+
 3. Подтверждаем создание Connection в первоначальном чейне, подставляя значения connection и клиентов, полученные на предыдущим шагах:
 ```
 hermes tx conn-ack --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-client 07-tendermint-70 --src-client 07-tendermint-144 --dst-connection connection-46 --src-connection connection-151
@@ -81,6 +84,7 @@ hermes tx conn-ack --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-client 07-
 ```
 hermes tx conn-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-client 07-tendermint-144 --src-client 07-tendermint-70 --dst-connection connection-151 --src-connection connection-46
 ```
+
 Более подробно и со схемой см. здесь: https://hermes.informal.systems/documentation/commands/tx/connection.html
 
 Создаем новые Channel между Planq и Kujira:
@@ -89,11 +93,13 @@ hermes tx conn-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-client
 hermes tx chan-open-init --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-connection connection-46 --dst-port transfer --src-port transfer
 ```
 В консоле отобразится созданный Channel вида: channel-51
+
 2. Создание Channel между Kujira и Planq со стороны Planq, подставляя ранее полученное значение connection и значение Channel (на предыдущем шагу):
 ```
 hermes tx chan-open-try --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-connection connection-151 --dst-port transfer --src-port transfer --src-channel channel-51
 ```
 В консоле отобразится созданный Channel вида: channel-23
+
 3. Подтверждаем создание Channel в первоначальном чейне, подставляя значения Channel и Connection, полученные на предыдущим шагах:
 ```
 hermes tx chan-open-ack --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-connection connection-46 --dst-port transfer --src-port transfer --dst-channel channel-51 --src-channel channel-23
@@ -102,6 +108,7 @@ hermes tx chan-open-ack --dst-chain kaiyo-1 --src-chain planq_7070-2 --dst-conne
 ```
 hermes tx chan-open-confirm --dst-chain planq_7070-2 --src-chain kaiyo-1 --dst-connection connection-151 --dst-port transfer --src-port transfer --dst-channel channel-23 --src-channel channel-51
 ```
+
 Более подробно и со схемой см. здесь: https://hermes.informal.systems/documentation/commands/tx/channel-open.html
 
 ## Дополнение конфига Hermes
