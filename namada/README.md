@@ -120,11 +120,11 @@ sudo systemctl enable namadad
 sudo systemctl start namadad
 
 #add  peers
-#cd $HOME
-#sudo systemctl stop namadad
-#rm "$HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json"
-#curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json
-#sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+cd $HOME
+sudo systemctl stop namadad
+rm "$HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json"
+curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #waiting full synchronization
 
