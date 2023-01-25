@@ -9,7 +9,7 @@ git fetch && git checkout $NEWTAG
 
 make build-release
 
-cd $HOME && sudo systemctl stop namadad
+cd $HOME && sudo systemctl stop namadad && systemctl disable namadad
 
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
 
@@ -23,7 +23,30 @@ namada --version
 ## Output
 Namada v0.13.3
 
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
+rm /etc/systemd/system/namadad* -rf
+
+sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
+[Unit]
+Description=namada
+After=network-online.target
+[Service]
+User=root
+WorkingDirectory=$HOME/.namada
+Environment=NAMADA_LOG=debug
+Environment=NAMADA_TM_STDOUT=true
+ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run --time 2023-01-25T21:00:00Z
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable namadad
+sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
