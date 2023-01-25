@@ -1,0 +1,35 @@
+############################################################### PLANQ #########################################################
+add to list:
+
+  ['transfer', 'channel-26'], # rebus
+
+
+############################################################### REBUS #########################################################
+[[chains]]
+id = 'reb_1111-1'
+rpc_addr = 'http://<ip:port>'
+grpc_addr = 'http://<ip:port>'
+websocket_addr = 'ws://<ip:port>/websocket'
+
+rpc_timeout = '30s'
+account_prefix = 'rebus'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 200000
+max_gas = 120000000
+gas_price = { price = 2500000000, denom = 'arebus' }
+gas_multiplier = 1.15
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '5s'
+max_block_time = '30s'
+trusting_period = '7days'
+memo_prefix = 'Relayed by CosmoBook'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-7'], # Planq
+]
