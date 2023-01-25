@@ -48,6 +48,11 @@ sudo systemctl daemon-reload
 sudo systemctl enable namadad
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
+## Output
+INFO namada_apps::cli::context: Chain ID: public-testnet-2.1.4014f207f6d
+INFO namadan::cli: Waiting ledger start time: DateTimeUtc(2023-01-25T21:00:00Z), time left: 14032.148518417s
+
+
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
