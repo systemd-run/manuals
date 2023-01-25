@@ -34,7 +34,7 @@ User=$USER
 WorkingDirectory=$HOME/.namada
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
-ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run --time 2023-01-25T21:00:00Z
+ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run
 StandardOutput=syslog
 StandardError=syslog
 Restart=always
@@ -89,7 +89,7 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.13.2" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.13.3" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-2.1.4014f207f6d" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
