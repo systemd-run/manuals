@@ -1,0 +1,33 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-36'], # regen
+]
+
+############################################################### REGEN ############################################################
+
+[[chains]]
+id = 'regen-1'
+rpc_addr = 'https://rpc-regen.ecostake.com:443'
+grpc_addr = 'https://grpc-regen-ia.cosmosia.notional.ventures:443'
+websocket_addr = 'wss://rpc-regen.ecostake.com:443/websocket'
+rpc_timeout = '15s'   
+account_prefix = 'regen'
+key_name = 'relayer'
+store_prefix = 'ibc' 
+max_tx_size = 180000
+max_gas = 500000
+gas_price = { price = 0.0025, denom = 'uregen' }                                                                                                                                      
+gas_multiplier = 2
+max_msg_num = 10
+clock_drift ='15s'                                                                                                                                                                    
+trusting_period = '14days'                                                                                                                                                            
+trust_threshold = { numerator = '1', denominator = '3' }                                                                                                                              
+memo_prefix = 'roadz | systemd'                                                                                                                        
+
+[chains.packet_filter]                                                                                                                                                                
+policy = 'allow'                                                                                                                                                                      
+list = [
+  ['transfer', 'channel-50'], # planq
+]
