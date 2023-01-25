@@ -3,7 +3,7 @@
 
 cd $HOME/namada
 
-NEWTAG=v0.13.2
+NEWTAG=v0.13.3
 
 git fetch && git checkout $NEWTAG
 
@@ -21,19 +21,13 @@ cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 namada --version
 
 ## Output
-Namada v0.13.2
+Namada v0.13.3
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-2.1.4014f207f6d/public-testnet-2.1.4014f207f6d.tar.gz"
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
-tar xvzf "$HOME/public-testnet-2.1.4014f207f6d.tar.gz"
+#check only height logs
+sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
-namada client utils join-network --chain-id public-testnet-2.1.4014f207f6d
-
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-
-## Output
-I[2023-01-24|09:37:17.504] service start                                module=main msg="Starting Node service" impl=Node
-I[2023-01-24|09:37:17.504] Genesis time is in the future. Sleeping until then... module=main genTime="2023-01-24 17:00:00 +0000 UTC"
 ```
 
 ## namada setup  
