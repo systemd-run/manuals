@@ -1,0 +1,36 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-23'], # kujira
+]
+
+############################################################### KUJIRA ########################################################
+[[chains]]
+id = 'kaiyo-1'
+rpc_addr = 'https://rpc-kujira.ecostake.com:443'
+grpc_addr = 'https://grpc-kujira-ia.cosmosia.notional.ventures:443'
+websocket_addr = 'wss://rpc-kujira.ecostake.com:443/websocket'
+
+rpc_timeout = '20s'
+account_prefix = 'kujira'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas = 2000000
+gas_price = { price = 0.00125, denom = 'ukuji' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2000000
+clock_drift = '45s'
+max_block_time = '10s'
+trusting_period = '10days'
+memo_prefix = 'Relayed by '
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-51'], # Planq
+]
