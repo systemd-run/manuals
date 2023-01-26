@@ -1,0 +1,36 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-8'], # stride
+]
+
+######################################################### STRIDE ##############################################################
+[[chains]]
+id = 'stride-1'
+rpc_addr = 'https://stride-rpc.polkachu.com:443'
+grpc_addr = 'http://stride-grpc.polkachu.com:12290'
+websocket_addr = 'wss://stride-rpc.polkachu.com:443/websocket'
+
+rpc_timeout = '20s'
+account_prefix = 'stride'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 300000
+max_gas = 2000000
+gas_price = { price = 0.00125, denom = 'ustrd' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2000000
+clock_drift = '45s'
+max_block_time = '10s'
+trusting_period = '10days'
+memo_prefix = 'Relayed by '
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-54'], # Planq
+]
