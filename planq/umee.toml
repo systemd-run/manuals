@@ -1,0 +1,37 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-22'], # umee
+]
+
+############################################################### UMEE ##########################################################
+
+[[chains]]
+id = 'umee-1'
+rpc_addr = 'https://umee-rpc.polkachu.com:443'
+grpc_addr = 'http://umee-grpc.polkachu.com:13690'
+websocket_addr = 'wss://rpc-umee-ia.cosmosia.notional.ventures:443/websocket'
+
+rpc_timeout = '20s'
+account_prefix = 'umee'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 100000
+max_gas = 2000000
+gas_price = { price = 0.001, denom = 'uumee' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 1800000
+clock_drift = '15s'
+max_block_time = '10s'
+trusting_period = '7days'
+memo_prefix = 'Relayed by '
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-41'], # Planq
+]
