@@ -1,0 +1,38 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-35'], # stargaze
+]
+
+############################################################### STARGAZE ######################################################
+
+
+[[chains]]
+id = 'stargaze-1'
+rpc_addr = 'https://rpc.stargaze-apis.com:443'
+grpc_addr = 'http://stargaze-grpc.polkachu.com:13790'
+websocket_addr = 'wss://rpc-stargaze.pupmos.network:443/websocket'
+
+rpc_timeout = '30s'
+account_prefix = 'stars'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 100000
+max_gas = 5000000
+gas_price = { price = 0.05, denom = 'ustars' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 2097152
+clock_drift = '20s'
+max_block_time = '10s'
+trusting_period = '9days'
+memo_prefix = 'Relayed by '
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+ policy = 'allow'
+ list = [
+      ['transfer', 'channel-135'], 
+] 
