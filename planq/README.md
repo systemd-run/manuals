@@ -21,6 +21,11 @@ source $HOME/.bash_profile
 ## Build Hermes from source (optional)
 If "GLIBC... not found..." error is displayed install hermes from source:
 ```
+cd $HOME
+rm $(which hermes) -rf
+rm $HOME/.hermes* -rf
+rm $HOME/hermes -rf
+mkdir -p $HOME/.hermes/bin
 git clone https://github.com/informalsystems/hermes.git
 cd hermes
 git checkout v1.2.0
