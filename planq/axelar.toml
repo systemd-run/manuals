@@ -24,8 +24,8 @@ store_prefix = 'ibc'
 max_tx_size = 180000
 max_gas = 500000
 gas_price = { price = 0.007, denom = 'uaxl' }
-gas_multiplier = 1
-max_msg_num = 10
+gas_multiplier = 1.1
+max_msg_num = 5
 clock_drift ='1000s'
 trusting_period = '6days'
 trust_threshold = { numerator = '1', denominator = '3' }
