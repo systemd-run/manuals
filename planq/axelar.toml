@@ -1,0 +1,38 @@
+############################################################### PLANQ #########################################################
+
+# rpc:  http://155.133.27.197:26657
+# grpc: http://155.133.27.197:19090
+# ws:   ws://155.133.27.197:26657/websocket
+
+# add to list:
+
+list = [
+  ['transfer', 'channel-49'], # axelar
+]
+
+############################################################### AXELAR ############################################################
+
+[[chains]]
+id = 'axelar-dojo-1'
+rpc_addr= 'http://127.0.0.1:26657'
+grpc_addr = 'http://127.0.0.1:19090'
+websocket_addr = 'ws://127.0.0.1:26657/websocket'
+rpc_timeout = '45s'
+account_prefix = 'axelar'
+key_name = 'relayer'
+store_prefix = 'ibc'
+max_tx_size = 180000
+max_gas = 500000
+gas_price = { price = 0.007, denom = 'uaxl' }
+gas_multiplier = 1
+max_msg_num = 10
+clock_drift ='1000s'
+trusting_period = '6days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'roadz | systemd'
+
+[chains.packet_filter]                                                                                    
+policy = 'allow'
+list = [
+  ['transfer', 'channel-57'], # planq
+]
