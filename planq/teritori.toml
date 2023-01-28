@@ -1,0 +1,36 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-44'], # teritori
+]
+
+############################################################### TERITORI ###############################################################
+[[chains]]
+id = 'teritori-1'
+rpc_addr = 'http://IP:PORT'
+grpc_addr = 'http://IP:PORT'
+websocket_addr = 'ws://IP:PORT/websocket'
+
+rpc_timeout = '30s'
+account_prefix = 'tori'
+key_name = 'relayer'
+address_type = { derivation = 'cosmos' }
+store_prefix = 'ibc'
+default_gas = 1000000
+max_gas = 35000000
+gas_price = { price = 0.01, denom = 'utori' }
+gas_multiplier = 1.2
+max_msg_num = 30
+max_tx_size = 800000
+clock_drift = '5s'
+max_block_time = '30s'
+trusting_period = '7days'
+memo_prefix = 'MONIKER'
+trust_threshold = { numerator = '1', denominator = '3' }
+
+[chains.packet_filter]
+ policy = 'allow'
+ list = [
+      ['transfer', 'channel-14'], # planq
+]
