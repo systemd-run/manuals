@@ -1,0 +1,30 @@
+############################################################### PLANQ #########################################################
+# add to list:
+
+list = [
+  ['transfer', 'channel-41'], # band
+]
+
+############################################################## BAND ###############################################################
+
+[[chains]]
+id = 'laozi-mainnet'
+rpc_addr = 'http://rpc.laozi1.bandchain.org:80'
+grpc_addr = 'https://grpc-bandchain-ia.cosmosia.notional.ventures:443'
+websocket_addr = 'wss://rpc-bandchain-ia.cosmosia.notional.ventures:443/websocket'
+rpc_timeout = '15s'
+account_prefix = 'band'
+key_name = 'relayer'
+store_prefix = 'ibc'
+max_gas = 2000000
+gas_price = { price = 0.0001, denom = 'uband' }
+gas_multiplier = 2
+clock_drift = '15s'
+trusting_period = '7days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'roadz | systemd'
+[chains.packet_filter]
+policy = 'allow'
+list = [
+  ['transfer', 'channel-99'], # planq
+]
