@@ -105,7 +105,7 @@ sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 Description=namada
 After=network-online.target
 [Service]
-User=root
+User=$USER
 WorkingDirectory=$HOME/.namada
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
