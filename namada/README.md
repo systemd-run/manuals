@@ -23,6 +23,16 @@ namada --version
 ## Output
 Namada v0.13.4
 
+rm -r $HOME/.namada/public-testnet-3.0.81edd4d6eb6
+rm $HOME/.namada/public-testnet-3.0.81edd4d6eb6.toml
+rm $HOME/.namada/global-config.toml
+
+export CHAIN_ID="public-testnet-3.0.81edd4d6eb6"
+namada client utils join-network --chain-id $CHAIN_ID  
+
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-3.0.81edd4d6eb6/public-testnet-3.0.81edd4d6eb6.tar.gz"
+tar xvzf "$HOME/public-testnet-3.0.81edd4d6eb6.tar.gz"
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
 #check only height logs
