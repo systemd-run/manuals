@@ -3,7 +3,7 @@
 
 cd $HOME/namada
 
-NEWTAG=v0.13.4
+NEWTAG=v0.14.1
 
 git fetch && git checkout $NEWTAG
 
@@ -21,7 +21,7 @@ cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 namada --version
 
 ## Output
-Namada v0.13.4
+Namada v0.14.1
 
 rm -r $HOME/.namada/public-testnet-3.0.81edd4d6eb6
 rm $HOME/.namada/public-testnet-3.0.81edd4d6eb6.toml
@@ -71,7 +71,7 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.13.4" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.14.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-3.0.81edd4d6eb6" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
