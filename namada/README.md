@@ -53,7 +53,9 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
 
 ## Output
-![1](https://user-images.githubusercontent.com/36136421/220626911-cd8ddb9e-20da-4d4e-81f6-78f3009a2fb5.png)
+I[2023-02-22|13:59:18.923] service start                                module=main msg="Starting Node service" impl=Node
+I[2023-02-22|13:59:18.923] Genesis time is in the future. Sleeping until then... module=main genTime="2023-02-22 17:00:00 +0000 UTC"
+
 
 ```
 
