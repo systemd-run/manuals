@@ -52,6 +52,10 @@ namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALID
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
 
+## Output
+![Screenshot_17](https://user-images.githubusercontent.com/36136421/220626911-cd8ddb9e-20da-4d4e-81f6-78f3009a2fb5.png)
+
+
 ```
 
 ## namada setup  
