@@ -1,6 +1,8 @@
 ## UPDATE for new release
 ```bash
 
+#CHECK your vars in /.bash_profile and change if they not correctly
+
 cd $HOME/namada
 
 NEWTAG=v0.14.1
@@ -21,25 +23,29 @@ cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 namada --version
 
 ## Output
-Namada v0.14.1
+#Namada v0.14.1
 
 rm -r $HOME/.namada/public-testnet-3.0.81edd4d6eb6
 rm $HOME/.namada/public-testnet-3.0.81edd4d6eb6.toml
+rm -r $HOME/.namada/public-testnet-4.0.16a35d789f4
+rm $HOME/.namada/public-testnet-4.0.16a35d789f4.toml
 rm $HOME/.namada/global-config.toml
 
-export CHAIN_ID="public-testnet-3.0.81edd4d6eb6"
+export CHAIN_ID="public-testnet-4.0.16a35d789f4"
 
 #for POST genesis validator
 namada client utils join-network --chain-id $CHAIN_ID  
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-3.0.81edd4d6eb6/public-testnet-3.0.81edd4d6eb6.tar.gz"
-tar xvzf "$HOME/public-testnet-3.0.81edd4d6eb6.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-4.0.16a35d789f4/public-testnet-4.0.16a35d789f4.tar.gz"
+tar xvzf "$HOME/public-testnet-4.0.16a35d789f4.tar.gz"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
+
 #end--------------------------------------------------------------
+
 
 #for PRE genesis validator
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
@@ -81,7 +87,7 @@ fi
 
 echo "export NAMADA_TAG=v0.14.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-3.0.81edd4d6eb6" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-4.0.16a35d789f4" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
@@ -104,8 +110,8 @@ namada --version
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-3.0.81edd4d6eb6/public-testnet-3.0.81edd4d6eb6.tar.gz"
-tar xvzf "$HOME/public-testnet-3.0.81edd4d6eb6.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-4.0.16a35d789f4/public-testnet-4.0.16a35d789f4.tar.gz"
+tar xvzf "$HOME/public-testnet-4.0.16a35d789f4.tar.gz"
 
 #Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
@@ -134,8 +140,8 @@ sudo systemctl start namadad
 #add  peers
 #cd $HOME
 #sudo systemctl stop namadad
-#rm "$HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json"
-#curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-2.1.4014f207f6d/tendermint/config/addrbook.json
+#rm "$HOME/.namada/public-testnet-4.0.16a35d789f4/tendermint/config/addrbook.json"
+#curl -s https://raw.githubusercontent.com/systemd-run/manuals/main/namada/addrbook.json > $HOME/.namada/public-testnet-4.0.16a35d789f4/tendermint/config/addrbook.json
 #sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #waiting full synchronization
@@ -186,7 +192,7 @@ namada client bond \
   --gas-limit 10000000
   
 #print your validator address
-export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-3.0.81edd4d6eb6/wallet.toml" | grep address`
+export WALLET_ADDRESS=`cat "$HOME/.namada/public-testnet-4.0.16a35d789f4/wallet.toml" | grep address`
 echo -e '\n\e[45mYour wallet:' $WALLET_ADDRESS '\e[0m\n'
 
 #waiting more than 2 epoch and check your status
