@@ -63,6 +63,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 [2023-02-22] service start module=main msg="Starting Node service" impl=Node
 [2023-02-22] Genesis time is in the future. Sleeping until then... module=main genTime="******"
 
+#then go to /Make wallet and run validator/ section
 
 ```
 
