@@ -201,13 +201,13 @@ namada client balance --owner $VALIDATOR_ALIAS --token NAM
 
 
 #stake your funds
-#waiting  1 epoch and continue if get INFO atest1... doesn't belong to any known validator account.
+#waiting  1 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
-  --validator $VALIDATOR_ALIAS \
-  --amount 1777 \
-  --signer $VALIDATOR_ALIAS \
-  --gas-amount 3000000 \
-  --gas-token NAM
+--validator $VALIDATOR_ALIAS \
+--amount 1777 \
+--signer $VALIDATOR_ALIAS \
+--source $VALIDATOR_ALIAS
+
   
   
 #print your validator address
