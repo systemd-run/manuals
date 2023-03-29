@@ -168,7 +168,16 @@ namada client transfer \
   --signer $WALLET
 
 cd $HOME
-namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commission-rate 0.05 --max-commission-rate-change 0.01 --signer $WALLET --gas-amount 100000000 --gas-token NAM --scheme ed25519 --unsafe-dont-encrypt
+namada client init-validator \
+--alias $VALIDATOR_ALIAS \
+--source $WALLET \
+--commission-rate 0.05 \
+--max-commission-rate-change 0.01 \
+--signer $WALLET \
+--gas-amount 100000000 \
+--gas-token NAM \
+--scheme ed25519 \
+--unsafe-dont-encrypt
 
 
 cd $HOME
