@@ -199,6 +199,8 @@ namada client transfer \
 #check balance
 namada client balance --owner $VALIDATOR_ALIAS --token NAM
 
+#check epoch number
+namada client epoch
 
 #stake your funds
 #waiting  1 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
@@ -208,8 +210,6 @@ namada client bond \
 --signer $VALIDATOR_ALIAS \
 --source $VALIDATOR_ALIAS
 
-  
-  
 #print your validator address
 
 RAW_ADDRESS=`cat "$HOME/.namada/$CHAIN_ID/wallet.toml" | grep address`
