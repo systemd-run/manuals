@@ -203,7 +203,7 @@ namada client balance --owner $VALIDATOR_ALIAS --token NAM
 namada client epoch
 
 #stake your funds
-#waiting  1 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
+#waiting  2 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
 --validator $VALIDATOR_ALIAS \
 --amount 1777 \
