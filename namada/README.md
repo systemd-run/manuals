@@ -201,13 +201,13 @@ namada client bond \
 
 RAW_ADDRESS=`cat "$HOME/.namada/$CHAIN_ID/wallet.toml" | grep address`
 WALLET_ADDRESS=$(echo -e $RAW_ADDRESS | sed 's|.*=||' | sed -e 's/^ "//' | sed -e 's/"$//')
-echo $WALLET_ADDRESS
 echo "export WALLET_ADDRESS=$WALLET_ADDRESS" >> ~/.bash_profile
 source ~/.bash_profile
+echo -e "\033[32m YOUR WALLET ADDRESS: \033[35m $WALLET_ADDRESS"
 
 #waiting more than 2 epoch and check your status
-namada client bonded-stake | grep $WALLET_ADDRESS
-namada client bonds | grep $WALLET_ADDRESS
+namada client bonded-stake --validator $VALIDATOR_ALIAS
+namada client bonds --validator $VALIDATOR_ALIAS
 
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
