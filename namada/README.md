@@ -158,7 +158,7 @@ curl -s localhost:26657/status
 #Make wallet and run validator
 
 cd $HOME
-namada wallet address gen --alias $WALLET
+namada wallet address gen --alias $WALLET --unsafe-dont-encrypt
 
 namada client transfer \
   --source faucet \
@@ -168,9 +168,8 @@ namada client transfer \
   --signer $WALLET
 
 cd $HOME
-namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commission-rate 0.05 --max-commission-rate-change 0.01 --gas-limit 10000000
+namada client init-validator --alias $VALIDATOR_ALIAS --source $WALLET --commission-rate 0.05 --max-commission-rate-change 0.01 --signer $WALLET --gas-amount 100000000 --gas-token NAM --scheme ed25519 --unsafe-dont-encrypt
 
-#enter pass
 
 cd $HOME
 namada client transfer \
@@ -191,11 +190,16 @@ namada client transfer \
 #check balance
 namada client balance --owner $VALIDATOR_ALIAS --token NAM
 
+
 #stake your funds
+#waiting  1 epoch and continue if get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
   --validator $VALIDATOR_ALIAS \
-  --amount 1500 \
-  --gas-limit 10000000
+  --amount 1777 \
+  --signer $VALIDATOR_ALIAS \
+  --gas-amount 3000000 \
+  --gas-token NAM
+  
   
 #print your validator address
 
