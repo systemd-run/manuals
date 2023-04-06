@@ -9,6 +9,9 @@
 [.. XX Network](https://github.com/ryssroad/xx-network/tree/9d26f92743bcd9f35102d5abccd161525e6bbac6)
 
 ### tools
+
+[. NGINX Reverse Proxy Configs](https://github.com/systemd-run/manuals/tree/main/nginx-reverse-conf)
+
 [. Planq tools](https://github.com/systemd-run/manuals/tree/main/planq)
 
 [. Cosmos Monitoring](https://github.com/systemd-run/manuals/tree/main/cosmos-monitoring)
