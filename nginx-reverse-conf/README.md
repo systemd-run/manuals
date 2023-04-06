@@ -8,3 +8,12 @@ look at [nginx.conf](https://github.com/systemd-run/manuals/blob/a8bb3d7fdcfb54b
 
 everything else you need is in 
 `reverse-rpc-ws.conf`
+
+for testing use this tool
+[wscat]
+ex: `wscat -c wss://host.ip/websocket` # ssl websocket in case of cosmos 
+
+### gRPC reverse
+ for grpc check use this tool
+ [grpcurl](https://github.com/fullstorydev/grpcurl)
+ ex: `grpcurl host.ip:443 list`
