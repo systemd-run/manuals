@@ -2,12 +2,12 @@
 ```bash
 
 #CHECK your vars in /.bash_profile and change if they not correctly
-sed -i '/public-testnet-5.0.d25aa64ace6/d' "$HOME/.bash_profile"
-sed -i '/v0.14.2/d' "$HOME/.bash_profile"
+sed -i '/public-testnet-6.0.a0266444b06/d' "$HOME/.bash_profile"
+sed -i '/v0.14.3/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.14.3
-NEWCHAINID=public-testnet-6.0.a0266444b06
+NEWTAG=v0.15.1
+NEWCHAINID=public-testnet-7.0.3c5a38dc983
 
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
@@ -29,7 +29,7 @@ cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 namada --version
 
 ## Output
-#Namada v0.14.3
+#Namada v0.15.1
 
 rm -r $HOME/.namada/public-testnet-3.0.81edd4d6eb6
 rm $HOME/.namada/public-testnet-3.0.81edd4d6eb6.toml
@@ -38,13 +38,14 @@ rm $HOME/.namada/public-testnet-4.0.16a35d789f4.toml
 rm -r $HOME/.namada/public-testnet-5.0.d25aa64ace6
 rm $HOME/.namada/public-testnet-5.0.d25aa64ace6.toml
 rm $HOME/.namada/global-config.toml
-
+rm $HOME/.namada/public-testnet-6.0.a0266444b06.toml
+rm $HOME/.namada/global-config.toml
 
 #for POST genesis validator
 namada client utils join-network --chain-id $CHAIN_ID  
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-6.0.a0266444b06/public-testnet-6.0.a0266444b06.tar.gz"
-tar xvzf "$HOME/public-testnet-6.0.a0266444b06.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-7.0.3c5a38dc983/public-testnet-7.0.3c5a38dc983.tar.gz"
+tar xvzf "$HOME/public-testnet-7.0.3c5a38dc983.tar.gz"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
@@ -98,9 +99,9 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.14.3" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.15.1" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-6.0.a0266444b06" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-7.0.3c5a38dc983" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
@@ -123,8 +124,8 @@ namada --version
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-6.0.a0266444b06/public-testnet-6.0.a0266444b06.tar.gz"
-tar xvzf "$HOME/public-testnet-6.0.a0266444b06.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-7.0.3c5a38dc983/public-testnet-7.0.3c5a38dc983.tar.gz"
+tar xvzf "$HOME/public-testnet-7.0.3c5a38dc983.tar.gz"
 
 #Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
