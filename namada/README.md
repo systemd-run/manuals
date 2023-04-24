@@ -37,7 +37,7 @@ rm -r $HOME/.namada/public-testnet-4.0.16a35d789f4
 rm $HOME/.namada/public-testnet-4.0.16a35d789f4.toml
 rm -r $HOME/.namada/public-testnet-5.0.d25aa64ace6
 rm $HOME/.namada/public-testnet-5.0.d25aa64ace6.toml
-rm $HOME/.namada/global-config.toml
+rm -r $HOME/.namada/public-testnet-6.0.a0266444b06
 rm $HOME/.namada/public-testnet-6.0.a0266444b06.toml
 rm $HOME/.namada/global-config.toml
 
