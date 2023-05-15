@@ -2,20 +2,33 @@
 ```bash
 
 #CHECK your vars in /.bash_profile and change if they not correctly
-sed -i '/public-testnet-6.0.a0266444b06/d' "$HOME/.bash_profile"
-sed -i '/v0.14.3/d' "$HOME/.bash_profile"
+sed -i '/public-testnet/d' "$HOME/.bash_profile"
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.15.1
-NEWCHAINID=public-testnet-7.0.3c5a38dc983
+NEWTAG=v0.15.3
+NEWCHAINID=public-testnet-8.0.b92ef72b820
 
+echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
 source ~/.bash_profile
 
+mkdir $BASE_DIR
+rustup update
+
+sudo apt install unzip -y
+PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
+curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
+sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
+rm -f $PROTOC_ZIP
+
+protoc --version
+
 cd $HOME/namada
 git fetch && git checkout $NAMADA_TAG
-make build-release
+make build dev-deps
 
 cd $HOME && sudo systemctl stop namadad 
 
@@ -29,23 +42,21 @@ cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 namada --version
 
 ## Output
-#Namada v0.15.1
+#Namada v0.15.3
 
-rm -r $HOME/.namada/public-testnet-3.0.81edd4d6eb6
-rm $HOME/.namada/public-testnet-3.0.81edd4d6eb6.toml
-rm -r $HOME/.namada/public-testnet-4.0.16a35d789f4
-rm $HOME/.namada/public-testnet-4.0.16a35d789f4.toml
-rm -r $HOME/.namada/public-testnet-5.0.d25aa64ace6
-rm $HOME/.namada/public-testnet-5.0.d25aa64ace6.toml
-rm -r $HOME/.namada/public-testnet-6.0.a0266444b06
-rm $HOME/.namada/public-testnet-6.0.a0266444b06.toml
+rm -r $HOME/.namada/public-testnet*
+rm -r $HOME/.namada/namada-internal*
 rm $HOME/.namada/global-config.toml
+
+rm -r $BASE_DIR/public-testnet*
+rm -r $BASE_DIR/namada-internal*
+rm $BASE_DIR/global-config.toml
 
 #for POST genesis validator
 namada client utils join-network --chain-id $CHAIN_ID  
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-7.0.3c5a38dc983/public-testnet-7.0.3c5a38dc983.tar.gz"
-tar xvzf "$HOME/public-testnet-7.0.3c5a38dc983.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
+tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
@@ -56,6 +67,7 @@ sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
 
 #for PRE genesis validator
+cp -r .namada/pre-genesis $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
@@ -74,9 +86,8 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 cd $HOME
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev -y
-sudo apt install jq build-essential bsdmainutils git make ncdu gcc git jq chrony liblz4-tool -y
-sudo apt install -y uidmap dbus-user-session
-
+sudo apt install jq build-essential bsdmainutils git make ncdu gcc git-core chrony liblz4-tool -y
+sudo apt install libclang-12-dev uidmap dbus-user-session protobuf-compiler -y
 
 cd $HOME
   sudo apt update
@@ -99,10 +110,11 @@ fi
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.15.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.15.3" >> ~/.bash_profile
 echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-7.0.3c5a38dc983" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-8.0.b92ef72b820" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
+echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
 #***CHANGE parameters !!!!!!!!!!!!!!!!!!!!!!!!!!!!***
 echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
@@ -110,7 +122,7 @@ echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
 source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
-make build-release
+make build dev-deps
 
 
 cd $HOME && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git checkout $TM_HASH
@@ -124,8 +136,8 @@ namada --version
 #run fullnode
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-7.0.3c5a38dc983/public-testnet-7.0.3c5a38dc983.tar.gz"
-tar xvzf "$HOME/public-testnet-7.0.3c5a38dc983.tar.gz"
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
+tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
 
 #Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
@@ -137,7 +149,7 @@ User=$USER
 WorkingDirectory=$HOME/.namada
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
-ExecStart=/usr/local/bin/namada --base-dir=$HOME/.namada node ledger run 
+ExecStart=/usr/local/bin/namada --base-dir=$HOME/.local/share/namada node ledger run 
 StandardOutput=syslog
 StandardError=syslog
 Restart=always
@@ -207,7 +219,7 @@ namada client epoch
 #waiting  2 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
 --validator $VALIDATOR_ALIAS \
---amount 1777 \
+--amount 1789 \
 --signer $VALIDATOR_ALIAS \
 --source $VALIDATOR_ALIAS
 
