@@ -1,5 +1,6 @@
 ## UPDATE for new release
 ```bash
+sudo apt update && sudo apt upgrade -y
 
 #CHECK your vars in /.bash_profile and change if they not correctly
 sed -i '/public-testnet/d' "$HOME/.bash_profile"
@@ -14,9 +15,12 @@ echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
 source ~/.bash_profile
 
-mkdir $BASE_DIR
-rustup update
+mkdir $HOME/.local/
+mkdir $HOME/.local/share/
+mkdir $HOME/.local/share/namada
 
+
+cd $HOME && rustup update
 sudo apt install unzip -y
 PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
 curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
@@ -29,8 +33,10 @@ protoc --version
 cd $HOME/namada
 git fetch && git checkout $NAMADA_TAG
 make build dev-deps
+make build-release
 
 cd $HOME && sudo systemctl stop namadad 
+sudo systemctl disable namadad
 
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
 
@@ -51,6 +57,31 @@ rm $HOME/.namada/global-config.toml
 rm -r $BASE_DIR/public-testnet*
 rm -r $BASE_DIR/namada-internal*
 rm $BASE_DIR/global-config.toml
+rm -rf /etc/systemd/system/namadad.service
+
+#Make service
+sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
+[Unit]
+Description=namada
+After=network-online.target
+[Service]
+User=$USER
+WorkingDirectory=$HOME/.local/share/namada
+Environment=NAMADA_LOG=debug
+Environment=NAMADA_TM_STDOUT=true
+ExecStart=/usr/local/bin/namada node ledger run 
+StandardOutput=syslog
+StandardError=syslog
+Restart=always
+RestartSec=10
+LimitNOFILE=65535
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reload
+sudo systemctl enable namadad
+sudo systemctl start namadad
 
 #for POST genesis validator
 namada client utils join-network --chain-id $CHAIN_ID  
@@ -67,7 +98,7 @@ sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
 
 #for PRE genesis validator
-cp -r .namada/pre-genesis $BASE_DIR/
+cd $HOME && cp -r .namada/pre-genesis $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
@@ -93,7 +124,7 @@ cd $HOME
   sudo apt update
   sudo curl https://sh.rustup.rs -sSf | sh -s -- -y
   . $HOME/.cargo/env
-  curl https://deb.nodesource.com/setup_16.x | sudo bash
+  curl https://deb.nodesource.com/setup_18.x | sudo bash
   sudo apt install cargo nodejs -y < "/dev/null"
   cargo --version
   
@@ -122,7 +153,7 @@ echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
 source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
-make build dev-deps
+make build-release
 
 
 cd $HOME && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git checkout $TM_HASH
@@ -146,10 +177,10 @@ Description=namada
 After=network-online.target
 [Service]
 User=$USER
-WorkingDirectory=$HOME/.namada
+WorkingDirectory=$HOME/.local/share/namada
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
-ExecStart=/usr/local/bin/namada --base-dir=$HOME/.local/share/namada node ledger run 
+ExecStart=/usr/local/bin/namada node ledger run 
 StandardOutput=syslog
 StandardError=syslog
 Restart=always
@@ -237,12 +268,18 @@ namada client bonds --validator $VALIDATOR_ALIAS
 
 #check only height logs
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
+```
 
-#DELETE NODE!!!
+##DELETE NODE!!!
+```bash
+cd $HOME && mkdir $HOME/namada_backup
+cd $HOME && cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
-rm /etc/systemd/system/namadad* -rf
-rm $(which namadad) -rf
+rm /etc/systemd/system/namada* -rf
+rm $(which namada) -rf
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw -rf
 rm $HOME/.namada* -rf
+rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
 rm $HOME/tendermint -rf
 
