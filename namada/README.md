@@ -123,6 +123,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev -y
 sudo apt install jq build-essential bsdmainutils git make ncdu gcc git-core chrony liblz4-tool -y
 sudo apt install libclang-12-dev uidmap dbus-user-session protobuf-compiler -y
+sudo apt install unzip -y
 
 cd $HOME
   sudo apt update
@@ -143,6 +144,16 @@ if ! [ -x "$(command -v go)" ]; then
   source ~/.bash_profile
 fi
 
+
+cd $HOME && rustup update
+PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
+curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
+sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
+sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
+rm -f $PROTOC_ZIP
+
+protoc --version
+
 #Setting up vars
 
 echo "export NAMADA_TAG=v0.15.3" >> ~/.bash_profile
@@ -155,6 +166,10 @@ echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
 
 source ~/.bash_profile
+
+mkdir $HOME/.local/
+mkdir $HOME/.local/share/
+mkdir $HOME/.local/share/namada
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
