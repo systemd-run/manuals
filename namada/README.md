@@ -183,12 +183,6 @@ cd $HOME && cp $HOME/tendermint/build/tendermint  /usr/local/bin/tendermint && c
 tendermint version
 namada --version
 
-#run fullnode
-cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
-
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
-tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
-
 #Make service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
@@ -211,7 +205,14 @@ EOF
 
 sudo systemctl daemon-reload
 sudo systemctl enable namadad
-sudo systemctl start namadad
+
+#run fullnode post-genesis
+cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
+
+cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
+tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
+
+sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
 #waiting full synchronization
 
