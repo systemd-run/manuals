@@ -111,6 +111,9 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
+If you still encounter a lot of errors when moving to version 15.3 then 
+I recommend going to "DELETE NODE!!!" section and reinstalling everything again
+
 ## namada setup  
 ```bash
 #install update and libs
