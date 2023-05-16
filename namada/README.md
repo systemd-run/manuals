@@ -209,6 +209,15 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable namadad
 
+
+#ONLY for PRE genesis validator
+#IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
+#cd $HOME && cp -r $CHANGE_KEYFOLDER/pre-genesis $BASE_DIR/
+namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
+#end--------------------------------------------------------------
+
+
 #run fullnode post-genesis
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
