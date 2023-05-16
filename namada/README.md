@@ -36,7 +36,6 @@ protoc --version
 
 cd $HOME/namada
 git fetch && git checkout $NAMADA_TAG
-make build dev-deps
 make build-release
 
 cd $HOME && sudo systemctl stop namadad 
@@ -90,9 +89,6 @@ sudo systemctl start namadad
 #for POST genesis validator
 namada client utils join-network --chain-id $CHAIN_ID  
 
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
-tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
-
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 
 #check only height logs
@@ -131,7 +127,9 @@ cd $HOME
   . $HOME/.cargo/env
   curl https://deb.nodesource.com/setup_18.x | sudo bash
   sudo apt install cargo nodejs -y < "/dev/null"
-  cargo --version
+  
+cargo --version
+node -v
   
 if ! [ -x "$(command -v go)" ]; then
   ver="1.19.4"
@@ -144,6 +142,7 @@ if ! [ -x "$(command -v go)" ]; then
   source ~/.bash_profile
 fi
 
+go version
 
 cd $HOME && rustup update
 PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
@@ -173,7 +172,6 @@ mkdir $HOME/.local/share/namada
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
-
 
 cd $HOME && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git checkout $TM_HASH
 make build
@@ -212,10 +210,6 @@ sudo systemctl enable namadad
 
 #run fullnode post-genesis
 cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
-
-cd $HOME && wget "https://github.com/heliaxdev/anoma-network-config/releases/download/public-testnet-8.0.b92ef72b820/public-testnet-8.0.b92ef72b820.tar.gz"
-tar xvzf "$HOME/public-testnet-8.0.b92ef72b820.tar.gz"
-
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
 #waiting full synchronization
