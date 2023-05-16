@@ -1,7 +1,5 @@
 ## UPDATE for new release
 
-If you still encounter a lot of errors when moving to version 15.3 - I recommend going to "DELETE NODE!!!" section and reinstalling everything again
-
 ```bash
 sudo apt update && sudo apt upgrade -y
 sudo apt install libclang-12-dev
@@ -62,7 +60,7 @@ rm -r $BASE_DIR/namada-internal*
 rm $BASE_DIR/global-config.toml
 rm -rf /etc/systemd/system/namadad.service
 
-#Make service
+#remake service
 sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
 [Unit]
 Description=namada
