@@ -1,4 +1,7 @@
 ## UPDATE for new release
+
+If you still encounter a lot of errors when moving to version 15.3 - I recommend going to "DELETE NODE!!!" section and reinstalling everything again
+
 ```bash
 sudo apt update && sudo apt upgrade -y
 
@@ -274,7 +277,8 @@ sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
-cd $HOME && cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+cp -r .namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
