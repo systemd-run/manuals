@@ -270,7 +270,8 @@ namada client bonds --validator $VALIDATOR_ALIAS
 sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 ```
 
-##DELETE NODE!!!
+## DELETE NODE!!!
+
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
 cd $HOME && cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
