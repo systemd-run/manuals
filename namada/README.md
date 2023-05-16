@@ -34,10 +34,10 @@ cd $HOME && sudo systemctl stop namadad
 
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
 
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
-cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
-cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+cd $HOME && cp "$HOME/namada/target/debug/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/debug/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/debug/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/debug/namadaw" /usr/local/bin/namadaw
 
 namada --version
 
@@ -146,7 +146,7 @@ Description=namada
 After=network-online.target
 [Service]
 User=$USER
-WorkingDirectory=$HOME/.namada
+WorkingDirectory=$HOME/.local/share/namada
 Environment=NAMADA_LOG=debug
 Environment=NAMADA_TM_STDOUT=true
 ExecStart=/usr/local/bin/namada --base-dir=$HOME/.local/share/namada node ledger run 
