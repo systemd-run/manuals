@@ -4,6 +4,7 @@ If you still encounter a lot of errors when moving to version 15.3 - I recommend
 
 ```bash
 sudo apt update && sudo apt upgrade -y
+sudo apt install libclang-12-dev
 
 #CHECK your vars in /.bash_profile and change if they not correctly
 sed -i '/public-testnet/d' "$HOME/.bash_profile"
