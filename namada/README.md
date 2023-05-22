@@ -26,8 +26,8 @@ create_empty_blocks = true
 create_empty_blocks_interval = "0ms"
 peer_gossip_sleep_duration = "100ms"
 peer_query_maj23_sleep_duration = "2000ms"
-# add this config under 
 timeout_commit = "10000ms"
+# add this config under 
 timeout_propose = "3000ms"
 timeout_propose_delta = "500ms"
 timeout_prevote = "1000ms"
