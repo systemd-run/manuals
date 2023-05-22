@@ -284,7 +284,7 @@ namada client bond \
 
 #print your validator address
 
-RAW_ADDRESS=`cat "$HOME/.namada/$CHAIN_ID/wallet.toml" | grep address`
+RAW_ADDRESS=`cat "$BASE_DIR/$CHAIN_ID/wallet.toml" | grep address`
 WALLET_ADDRESS=$(echo -e $RAW_ADDRESS | sed 's|.*=||' | sed -e 's/^ "//' | sed -e 's/"$//')
 echo "export WALLET_ADDRESS=$WALLET_ADDRESS" >> ~/.bash_profile
 source ~/.bash_profile
