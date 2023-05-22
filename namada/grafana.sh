@@ -7,6 +7,7 @@ reset="\e[0m"
 touch .bash_profile
 source .bash_profile
 echo -e "${green}************************${reset}"
+
 # Update and upgrade the system
 echo -e "${green}*************Update and upgrade the system*************${reset}"
 
@@ -15,7 +16,7 @@ apt-get upgrade -y
 
 # Install necessary dependencies
 echo -e "${green}*************Install necessary dependencies*************${reset}"
-apt-get install -y curl tar wget original-awk gawk
+apt-get install -y curl tar wget original-awk gawk netcat
 
 set -e
 
@@ -97,7 +98,7 @@ scrape_configs:
   - job_name: "prometheus"
     metrics_path: /metrics
     static_configs:
-      - targets: ["localhost:9100"]
+      - targets: ["localhost:9345"]
   - job_name: "namada"
     scrape_interval: 5s
     metrics_path: /
@@ -122,7 +123,7 @@ ExecStart=/usr/local/bin/prometheus \
   --storage.tsdb.path=/var/lib/prometheus \
   --web.console.templates=/etc/prometheus/consoles \
   --web.console.libraries=/etc/prometheus/console_libraries \
-  --web.listen-address=0.0.0.0:9090
+  --web.listen-address=0.0.0.0:9344
 Restart=always
 [Install]
 WantedBy=multi-user.target
@@ -165,8 +166,42 @@ check_service_status "prometheus"
 # Install and start Prometheus Node Exporter
 echo -e "${green}*************Install and start Prometheus Node Exporter***********${reset}"
 apt install prometheus-node-exporter -y
-systemctl start prometheus-node-exporter
+
+sudo tee /etc/systemd/system/prometheus-node-exporter.service<<EOF
+[Unit]
+Description=prometheus-node-exporter
+Wants=network-online.target
+After=network-online.target
+[Service]
+Type=simple
+User=$USER
+ExecStart=/usr/bin/prometheus-node-exporter --web.listen-address=0.0.0.0:9345
+Restart=always
+[Install]
+WantedBy=multi-user.target
+EOF
+
 systemctl enable prometheus-node-exporter
+systemctl start prometheus-node-exporter
+
+# New port number grafana
+echo -e "${green}*************New port number grafana***********${reset}"
+# Grafana configuration file path
+grafana_config_file="/etc/grafana/grafana.ini"
+# New port number
+new_port="9346"
+# Check if the Grafana configuration file exists
+if [ ! -f "$grafana_config_file" ]; then
+  echo "Grafana configuration file not found: $grafana_config_file"
+  exit 1
+fi
+# Replace the port number in the configuration file
+sed -i "s/^;http_port = .*/http_port = $new_port/" "$grafana_config_file"
+# Restart the Grafana service
+systemctl restart grafana-server
+# Check Grafana service status
+echo -e "${green}************Check Grafana service status************${reset}"
+check_service_status "grafana-server"
 
 # Change config
 echo -e "${green}*************Change config prometheus ON ***********${reset}"
@@ -186,21 +221,39 @@ fi
 
 # Reload systemd
 echo -e "${green}**************RESTART systemd**********${reset}"
+systemctl restart prometheus-node-exporter
 systemctl restart prometheus
 systemctl restart grafana-server
 systemctl restart namadad
 
+check_service_status "prometheus-node-exporter"
+check_service_status "prometheus"
+check_service_status "grafana-server"
+check_service_status "namadad"
+
+json_data=$(curl -s http://localhost:26657/status)
+namada_address=$(echo "$json_data" | jq -r '.result.validator_info.address')
+network=$(echo "$json_data" | jq -r '.result.node_info.network')
+
+green="\e[32m"
+pink="\e[35m"
+reset="\e[0m"
 echo -e "${green}*************Install OK***********${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
-echo -e "${green}Grafana is accessible at: http://$real_ip:3000${reset}"
+echo -e "${green}Grafana is accessible at: http://$real_ip:$new_port${reset}"
 echo -e "${pink}Login credentials:${reset}"
 echo -e "${pink}---------Username:${reset} admin"
 echo -e "${pink}---------Password:${reset} admin"
 echo -e "${green}**********************************${reset}"
 echo -e "${pink} Open grafana and add to Home/Connections/Your_connections/Data_sources  ${reset}"
-echo -e "${pink} ...new source prometheus with address http://localhost:9090  ${reset}"
+echo -e "${pink} ...new source prometheus with address${reset} http://localhost:9344 "
 echo -e "${pink} ...click SAVE and TEST button  ${reset}"
+echo -e "${green}**********************************${reset}"
+echo -e "${green}**********************************${reset}"
 echo -e "${pink} ...then import to Home/Dashboards/Import_dashboard new dashboard    ${reset}"
-echo -e "${pink} ...Import via grafana.com   ID = 18401    ${reset}"
+echo -e "${pink} ...Import via grafana.com ${reset}  ID = 18401  "
+echo -e "${pink} Change Chain_ID   ${reset}          $namada_address  "
+echo -e "${pink} Change Validator  ${reset}          $network  "
+echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
