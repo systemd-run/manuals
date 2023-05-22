@@ -1,4 +1,24 @@
-## UPDATE for new release
+## UPDATE for new release v0.15.4
+
+```bash
+cd $HOME/namada
+git fetch && git checkout v0.15.4
+make build-release
+
+cd $HOME && sudo systemctl stop namadad 
+
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+
+namada --version
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+```
+
+## UPDATE for new release v0.15.3
 
 ```bash
 sudo apt update && sudo apt upgrade -y
