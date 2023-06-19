@@ -39,114 +39,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
-## UPDATE for new release v0.15.3
 
-```bash
-sudo apt update && sudo apt upgrade -y
-sudo apt install libclang-12-dev
-
-#CHECK your vars in /.bash_profile and change if they not correctly
-sed -i '/public-testnet/d' "$HOME/.bash_profile"
-sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
-sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
-
-NEWTAG=v0.15.3
-NEWCHAINID=public-testnet-8.0.b92ef72b820
-
-echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
-echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
-echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
-source ~/.bash_profile
-
-mkdir $HOME/.local/
-mkdir $HOME/.local/share/
-mkdir $HOME/.local/share/namada
-
-
-cd $HOME && rustup update
-sudo apt install unzip -y
-PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
-curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
-sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
-sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
-rm -f $PROTOC_ZIP
-
-protoc --version
-
-cd $HOME/namada
-git fetch && git checkout $NAMADA_TAG
-make build-release
-
-cd $HOME && sudo systemctl stop namadad 
-sudo systemctl disable namadad
-
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
-
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
-cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
-cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
-
-namada --version
-
-## Output
-#Namada v0.15.3
-
-rm -r $HOME/.namada/public-testnet*
-rm -r $HOME/.namada/namada-internal*
-rm $HOME/.namada/global-config.toml
-
-rm -r $BASE_DIR/public-testnet*
-rm -r $BASE_DIR/namada-internal*
-rm $BASE_DIR/global-config.toml
-rm -rf /etc/systemd/system/namadad.service
-
-#remake service
-sudo tee /etc/systemd/system/namadad.service > /dev/null <<EOF
-[Unit]
-Description=namada
-After=network-online.target
-[Service]
-User=$USER
-WorkingDirectory=$HOME/.local/share/namada
-Environment=NAMADA_LOG=debug
-Environment=NAMADA_TM_STDOUT=true
-ExecStart=/usr/local/bin/namada node ledger run 
-StandardOutput=syslog
-StandardError=syslog
-Restart=always
-RestartSec=10
-LimitNOFILE=65535
-[Install]
-WantedBy=multi-user.target
-EOF
-
-sudo systemctl daemon-reload
-sudo systemctl enable namadad
-sudo systemctl start namadad
-
-#for POST genesis validator
-namada client utils join-network --chain-id $CHAIN_ID  
-
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
-
-#check only height logs
-sudo journalctl -u namadad -n 10000 -f -o cat | grep height
-
-#end--------------------------------------------------------------
-
-
-#for PRE genesis validator
-cd $HOME && cp -r .namada/pre-genesis $BASE_DIR/
-namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
-#end--------------------------------------------------------------
-
-## Output
-[2023-02-22] service start module=main msg="Starting Node service" impl=Node
-[2023-02-22] Genesis time is in the future. Sleeping until then... module=main genTime="******"
-
-#then go to /Make wallet and run validator/ section
 
 ```
 
@@ -158,10 +51,10 @@ I recommend going to "DELETE NODE!!!" section and reinstalling everything again
 #install update and libs
 cd $HOME
 sudo apt update && sudo apt upgrade -y
-sudo apt install curl tar wget clang pkg-config libssl-dev libclang-dev -y
-sudo apt install jq build-essential bsdmainutils git make ncdu gcc git-core chrony liblz4-tool -y
-sudo apt install libclang-12-dev uidmap dbus-user-session protobuf-compiler -y
-sudo apt install unzip -y
+sudo apt install curl tar wget clang pkg-config git make libssl-dev libclang-dev libclang-12-dev -y
+sudo apt install jq build-essential bsdmainutils ncdu gcc git-core chrony liblz4-tool -y
+sudo apt install uidmap dbus-user-session protobuf-compiler unzip -y
+
 
 cd $HOME
   sudo apt update
