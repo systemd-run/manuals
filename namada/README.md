@@ -2,6 +2,8 @@
 
 ```bash
 
+#remove the node and install everything on a new one 
+ 
 
 cd $HOME && mkdir $HOME/namada_backup
 cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
@@ -16,11 +18,12 @@ rm $HOME/namada -rf
 rm $HOME/tendermint -rf
 rm $HOME/cometbft -rf
 
-
+#go to namada setup
 
 ```
-
-
+||
+||
+\/
 
 ```
 
