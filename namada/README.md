@@ -2,6 +2,7 @@
 
 ```bash
 
+
 cd $HOME && mkdir $HOME/namada_backup
 cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
 cp -r .namada/pre-genesis $HOME/namada_backup
@@ -66,6 +67,12 @@ sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
 rm -f $PROTOC_ZIP
 
 protoc --version
+
+#CHECK your vars in /.bash_profile and change if they not correctly
+sed -i '/public-testnet/d' "$HOME/.bash_profile"
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
+sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
+sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
