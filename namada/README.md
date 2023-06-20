@@ -23,10 +23,6 @@ rm $HOME/cometbft -rf
 ```
 
 
-```
-
-
-
 ## namada setup  
 ```bash
 #install update and libs
