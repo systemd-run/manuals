@@ -1,41 +1,21 @@
-## UPDATE for new release v0.15.4
+## UPDATE for new release v0.17.3
 
 ```bash
-cd $HOME/namada
-git fetch && git checkout v0.15.4
-make build-release
 
-cd $HOME && sudo systemctl stop namadad 
+cd $HOME && mkdir $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+cp -r .namada/pre-genesis $HOME/namada_backup
+systemctl stop namadad && systemctl disable namadad
+rm /etc/systemd/system/namada* -rf
+rm $(which namada) -rf
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
+rm $HOME/.namada* -rf
+rm $HOME/.local/share/namada -rf
+rm $HOME/namada -rf
+rm $HOME/tendermint -rf
+rm $HOME/cometbft -rf
 
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw
 
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
-cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
-cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
-
-namada --version
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-
-# open file "/root/.local/share/namada/public-testnet-8.0.b92ef72b820/tendermint/config/config.toml"
-# find section 
-[consensus]
-wal_file = "data/cs.wal/wal"
-double_sign_check_height = 0
-create_empty_blocks = true
-create_empty_blocks_interval = "0ms"
-peer_gossip_sleep_duration = "100ms"
-peer_query_maj23_sleep_duration = "2000ms"
-timeout_commit = "10000ms"
-# add this config under 
-timeout_propose = "3000ms"
-timeout_propose_delta = "500ms"
-timeout_prevote = "1000ms"
-timeout_prevote_delta = "500ms"
-timeout_precommit = "1000ms"
-timeout_precommit_delta = "500ms"
-
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
@@ -43,8 +23,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
-If you still encounter a lot of errors when moving to version 15.3 then 
-I recommend going to "DELETE NODE!!!" section and reinstalling everything again
+
 
 ## namada setup  
 ```bash
@@ -80,8 +59,8 @@ fi
 go version
 
 cd $HOME && rustup update
-PROTOC_ZIP=protoc-3.14.0-linux-x86_64.zip
-curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v3.14.0/$PROTOC_ZIP
+PROTOC_ZIP=protoc-23.3-linux-x86_64.zip
+curl -OL https://github.com/protocolbuffers/protobuf/releases/download/v23.3/$PROTOC_ZIP
 sudo unzip -o $PROTOC_ZIP -d /usr/local bin/protoc
 sudo unzip -o $PROTOC_ZIP -d /usr/local 'include/*'
 rm -f $PROTOC_ZIP
@@ -90,9 +69,9 @@ protoc --version
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.15.3" >> ~/.bash_profile
-echo "export TM_HASH=v0.1.4-abciplus" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-8.0.b92ef72b820" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.17.3" >> ~/.bash_profile
+echo "export CBFT=v0.37.2" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-9.0.5aa315d1a22" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -104,20 +83,22 @@ source ~/.bash_profile
 mkdir $HOME/.local/
 mkdir $HOME/.local/share/
 mkdir $HOME/.local/share/namada
+mkdir $BASE_DIR/pre-genesis
+cp -r $HOME/namada_backup/* $BASE_DIR/pre-genesis/
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
 
-cd $HOME && git clone https://github.com/heliaxdev/tendermint && cd tendermint && git checkout $TM_HASH
+cd $HOME && git clone https://github.com/cometbft/cometbft.git && cd cometbft && git checkout $CBFT
 make build
 
-cd $HOME && cp $HOME/tendermint/build/tendermint /usr/local/bin/tendermint && \
+cd $HOME && cp $HOME/cometbft/build/cometbft /usr/local/bin/cometbft && \
 cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
 cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
 cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
 cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 
-tendermint version
+cometbft version
 namada --version
 
 #Make service
@@ -128,8 +109,8 @@ After=network-online.target
 [Service]
 User=$USER
 WorkingDirectory=$HOME/.local/share/namada
-Environment=NAMADA_LOG=debug
-Environment=NAMADA_TM_STDOUT=true
+Environment=TM_LOG_LEVEL=p2p:none,pex:error
+Environment=NAMADA_CMT_STDOUT=true
 ExecStart=/usr/local/bin/namada node ledger run 
 StandardOutput=syslog
 StandardError=syslog
@@ -182,7 +163,6 @@ namada client init-validator \
 --signer $WALLET \
 --gas-amount 100000000 \
 --gas-token NAM \
---scheme ed25519 \
 --unsafe-dont-encrypt
 
 
@@ -212,7 +192,7 @@ namada client epoch
 #waiting  2 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
 --validator $VALIDATOR_ALIAS \
---amount 1789 \
+--amount 1888 \
 --signer $VALIDATOR_ALIAS \
 --source $VALIDATOR_ALIAS
 
@@ -247,10 +227,11 @@ cp -r .namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw -rf
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
 rm $HOME/.namada* -rf
 rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
 rm $HOME/tendermint -rf
+rm $HOME/cometbft -rf
 
 ```
