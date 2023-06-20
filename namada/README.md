@@ -91,7 +91,7 @@ mkdir $HOME/.local/
 mkdir $HOME/.local/share/
 mkdir $HOME/.local/share/namada
 mkdir $BASE_DIR/pre-genesis
-cp -r $HOME/namada_backup/pre-genesis/* $BASE_DIR/pre-genesis
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/pre-genesis/
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
