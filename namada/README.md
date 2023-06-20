@@ -21,11 +21,7 @@ rm $HOME/cometbft -rf
 #go to namada setup
 
 ```
-||
 
-||
-
-\/
 
 ```
 
