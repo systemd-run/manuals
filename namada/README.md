@@ -22,7 +22,9 @@ rm $HOME/cometbft -rf
 
 ```
 ||
+
 ||
+
 \/
 
 ```
