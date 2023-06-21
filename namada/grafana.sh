@@ -234,8 +234,6 @@ check_service_status "namadad"
 json_data=$(curl -s http://localhost:26657/status)
 namada_address=$(echo "$json_data" | jq -r '.result.validator_info.address')
 network=$(echo "$json_data" | jq -r '.result.node_info.network')
-
-
 echo -e "${green}*************Install OK***********${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
@@ -255,3 +253,4 @@ echo -e "${pink} Change Validator   ${reset}          $namada_address  "
 echo -e "${pink} Change Chain_ID  ${reset}          $network  "
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
+check_service_status "namadad"
