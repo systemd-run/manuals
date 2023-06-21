@@ -227,6 +227,17 @@ else
   echo "Text replaced successfully."
 fi
 
+search_text2="namespace = "namada_tm""
+replacement_text2="namespace = "namadan_tm""
+
+# Check if the replacement text already exists in the file
+if grep -qFx "$replacement_text2" "$file_path"; then
+  echo "Replacement text already exists. No changes needed."
+else
+  # Replace the search text with the replacement text
+  sed -i "s/$search_text2/$replacement_text2/g" "$file_path"
+  echo "Text replaced successfully."
+fi
 
 # Reload systemd
 echo -e "${green}**************RESTART systemd**********${reset}"
