@@ -4,6 +4,10 @@ green="\e[32m"
 pink="\e[35m"
 reset="\e[0m"
 
+json_data=$(curl -s http://localhost:26657/status)
+namada_address=$(echo "$json_data" | jq -r '.result.validator_info.address')
+network=$(echo "$json_data" | jq -r '.result.node_info.network')
+
 touch .bash_profile
 source .bash_profile
 echo -e "${green}************************${reset}"
@@ -226,14 +230,16 @@ systemctl restart prometheus
 systemctl restart grafana-server
 systemctl restart namadad
 
+sleep 1
+
+
 check_service_status "prometheus-node-exporter"
 check_service_status "prometheus"
 check_service_status "grafana-server"
 check_service_status "namadad"
 
-json_data=$(curl -s http://localhost:26657/status)
-namada_address=$(echo "$json_data" | jq -r '.result.validator_info.address')
-network=$(echo "$json_data" | jq -r '.result.node_info.network')
+sleep 1
+
 echo -e "${green}*************Install OK***********${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
@@ -249,7 +255,7 @@ echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${pink} ...then import to Home/Dashboards/Import_dashboard new dashboard    ${reset}"
 echo -e "${pink} ...Import via grafana.com ${reset}  ID = 18401  "
-echo -e "${pink} Change Validator   ${reset}          $namada_address  "
+echo -e "${pink} Change Validator ${reset}          $namada_address  "
 echo -e "${pink} Change Chain_ID  ${reset}          $network  "
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
