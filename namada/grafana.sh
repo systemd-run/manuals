@@ -108,6 +108,11 @@ scrape_configs:
     metrics_path: /
     static_configs:
       - targets: ['localhost:26660']
+  - job_name: "namada2"
+    scrape_interval: 5s
+    metrics_path: /
+    static_configs:
+      - targets: ['localhost:26657']  
 EOF
 
 # Create Prometheus service
