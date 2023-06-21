@@ -11,7 +11,8 @@ cp -r .namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan -rf
+rm /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
 rm $HOME/.namada* -rf
 rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
@@ -218,9 +219,24 @@ sudo journalctl -u namadad -n 10000 -f -o cat | grep height
 
 ## INSTALL GRAFANA MONITORING
 
+
 ```bash
 cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/manuals/main/namada/grafana.sh && chmod +x grafana.sh && ./grafana.sh
 ```
+Grafana is accessible at: http://localhost:9346
+Login credentials:
+---------Username: admin
+---------Password: admin
+**********************************
+ Open grafana and add to Home/Connections/Your_connections/Data_sources
+ ...new source prometheus with address http://localhost:9344
+ ...click SAVE and TEST button
+**********************************
+ ...then import to Home/Dashboards/Import_dashboard new dashboard
+ ...Import via grafana.com     ID = 19014
+ Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
+ Change Chain_ID               for example (public-testnet-9.0.5aa315d1a22)
+
 
 ## DELETE NODE!!!
 
