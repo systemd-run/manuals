@@ -235,9 +235,7 @@ json_data=$(curl -s http://localhost:26657/status)
 namada_address=$(echo "$json_data" | jq -r '.result.validator_info.address')
 network=$(echo "$json_data" | jq -r '.result.node_info.network')
 
-green="\e[32m"
-pink="\e[35m"
-reset="\e[0m"
+
 echo -e "${green}*************Install OK***********${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
