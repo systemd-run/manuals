@@ -103,7 +103,7 @@ scrape_configs:
     scrape_interval: 5s
     metrics_path: /
     static_configs:
-      - targets: ['localhost:26661']
+      - targets: ['localhost:26660']
 EOF
 
 # Create Prometheus service
@@ -205,7 +205,7 @@ check_service_status "grafana-server"
 
 # Change config
 echo -e "${green}*************Change config prometheus ON ***********${reset}"
-file_path="$HOME/.local/share/namada/public-testnet-8.0.b92ef72b820/config.toml"
+file_path="$HOME/.local/share/namada/public-testnet-9.0.5aa315d1a22/config.toml"
 search_text="instrumentation_prometheus = false"
 replacement_text="instrumentation_prometheus = true"
 
@@ -253,7 +253,7 @@ echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${pink} ...then import to Home/Dashboards/Import_dashboard new dashboard    ${reset}"
 echo -e "${pink} ...Import via grafana.com ${reset}  ID = 18401  "
-echo -e "${pink} Change Chain_ID   ${reset}          $namada_address  "
-echo -e "${pink} Change Validator  ${reset}          $network  "
+echo -e "${pink} Change Validator   ${reset}          $namada_address  "
+echo -e "${pink} Change Chain_ID  ${reset}          $network  "
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
