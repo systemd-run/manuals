@@ -246,8 +246,7 @@ systemctl restart prometheus
 systemctl restart grafana-server
 systemctl restart namadad
 
-sleep 1
-
+sleep 3
 
 check_service_status "prometheus-node-exporter"
 check_service_status "prometheus"
