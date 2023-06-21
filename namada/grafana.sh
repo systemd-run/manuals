@@ -176,6 +176,8 @@ check_service_status "prometheus"
 echo -e "${green}*************Install and start Prometheus Node Exporter***********${reset}"
 apt install prometheus-node-exporter -y
 
+rm /etc/systemd/system/prometheus-node-exporter.service
+
 sudo tee /etc/systemd/system/prometheus-node-exporter.service<<EOF
 [Unit]
 Description=prometheus-node-exporter
@@ -269,7 +271,8 @@ echo -e "${pink} ...click SAVE and TEST button  ${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${green}**********************************${reset}"
 echo -e "${pink} ...then import to Home/Dashboards/Import_dashboard new dashboard    ${reset}"
-echo -e "${pink} ...Import via grafana.com ${reset}  ID = 19014  "
+echo -e "${pink} ...Import NAMADA Dashboard   via grafana.com ${reset}  ID = 19014  "
+echo -e "${pink} ...Import Node Exporter Full via grafana.com ${reset}  ID = 1860  "
 echo -e "${pink} Change Validator ${reset}          $namada_address  "
 echo -e "${pink} Change Chain_ID  ${reset}          $network  "
 echo -e "${green}**********************************${reset}"
