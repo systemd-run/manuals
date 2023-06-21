@@ -229,8 +229,8 @@ else
   echo "Text replaced successfully."
 fi
 
-search_text2="namespace = "namada_tm""
-replacement_text2="namespace = "namadan_tm""
+search_text2='namespace = "namada_tm"'
+replacement_text2='namespace = "namadan_tm"'
 
 # Check if the replacement text already exists in the file
 if grep -qFx "$replacement_text2" "$file_path"; then
