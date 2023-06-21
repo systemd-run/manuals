@@ -206,8 +206,8 @@ check_service_status "grafana-server"
 # Change config
 echo -e "${green}*************Change config prometheus ON ***********${reset}"
 file_path="$HOME/.local/share/namada/public-testnet-9.0.5aa315d1a22/config.toml"
-search_text="instrumentation_prometheus = false"
-replacement_text="instrumentation_prometheus = true"
+search_text="prometheus = false"
+replacement_text="prometheus = true"
 
 # Check if the replacement text already exists in the file
 if grep -qFx "$replacement_text" "$file_path"; then
