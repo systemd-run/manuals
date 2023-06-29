@@ -35,6 +35,12 @@ cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
 cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 systemctl enable namadad
 
+#check version
+namada --version
+#output: Namada v0.17.5
+
+
+
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
