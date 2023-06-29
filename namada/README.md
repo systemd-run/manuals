@@ -46,6 +46,15 @@ namada --version
 mkdir $HOME/.local/share/namada
 cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+
+#check hashes of MASP parameters
+cd .masp-params && shasum masp*
+
+#outputs
+#8bb101baaa03292b237b1788c4ab4d2fd6f976b2  masp-convert.params
+#6dfb73efa344c2d55946150e101d76f70bd6026a  masp-output.params
+#62c942ea09a6f318fdb5899fb112c283e2185040  masp-spend.params
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
 
