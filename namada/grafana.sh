@@ -66,8 +66,8 @@ echo -e "${green}*************Download and extract Prometheus***********${reset}
 cd $HOME
 wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
 sleep 1
-tar xvf prometheus*.tar.gz
-rm prometheus*.tar.gz
+tar xvf prometheus-2.45.0.linux-amd64.tar.gz
+rm prometheus-2.45.0.linux-amd64.tar.gz
 cd prometheus*/
 
 if [ -d "/etc/prometheus/consoles" ] && [ "$(ls -A /etc/prometheus/consoles)" ]; then
