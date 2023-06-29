@@ -1,3 +1,64 @@
+## UPDATE for new release v0.17.5
+
+```bash
+##only if you update from v0.17.3 !
+##IF NOT go to delete section and reinstalling everything again
+
+cd $HOME && mkdir $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+systemctl stop namadad && systemctl disable namadad
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
+rm $HOME/.local/share/namada -rf
+rm -rf $HOME/.masp-params
+
+sudo apt update && sudo apt upgrade -y
+
+#CHECK your vars in /.bash_profile and change if they not correctly
+sed -i '/public-testnet/d' "$HOME/.bash_profile"
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
+sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
+
+NEWTAG=v0.17.5
+NEWCHAINID=public-testnet-10.3718993c3648
+
+echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
+echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
+source ~/.bash_profile
+
+cd $HOME/namada
+git fetch && git checkout $NAMADA_TAG
+make build-release
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+systemctl enable namadad
+
+#ONLY for PRE genesis validator
+#IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
+mkdir $HOME/.local/share/namada
+mkdir $BASE_DIR/pre-genesis
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/pre-genesis/
+namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
+#end--------------------------------------------------------------
+
+
+#run fullnode post-genesis
+cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
+sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
+#end--------------------------------------------------------------
+
+## Output
+[2023-**-**] service start module=main msg="Starting Node service" impl=Node
+[2023-**-**] Genesis time is in the future. Sleeping until then... module=main genTime="******"
+
+#then go to /Make wallet and run validator/ section
+
+
+```
+
 ## UPDATE for new release v0.17.3
 
 ```bash
@@ -88,8 +149,7 @@ source ~/.bash_profile
 mkdir $HOME/.local/
 mkdir $HOME/.local/share/
 mkdir $HOME/.local/share/namada
-mkdir $BASE_DIR/pre-genesis
-cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/pre-genesis/
+
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
@@ -132,7 +192,8 @@ sudo systemctl enable namadad
 
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
-#cd $HOME && cp -r $CHANGE_KEYFOLDER/pre-genesis $BASE_DIR/
+mkdir $BASE_DIR/pre-genesis
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/pre-genesis/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
@@ -147,6 +208,7 @@ sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 # check "catching_up": false  --- is OK
 curl -s localhost:26657/status
 
+#--------------------------------------------------------------
 #Make wallet and run validator
 
 cd $HOME
