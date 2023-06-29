@@ -303,7 +303,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change Chain_ID               for example (public-testnet-9.0.5aa315d1a22)
+# Change Chain_ID               for example (public-testnet-10.3718993c3648)
 ```
 
 ## DELETE NODE!!!
