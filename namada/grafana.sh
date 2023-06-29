@@ -63,8 +63,8 @@ done
 
 # Download and extract Prometheus
 echo -e "${green}*************Download and extract Prometheus***********${reset}"
-cd /tmp
-curl -s https://api.github.com/repos/prometheus/prometheus/releases/latest | grep browser_download_url | grep linux-amd64 | cut -d '"' -f 4 | wget -qi -
+cd $HOME
+wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
 tar xvf prometheus*.tar.gz
 cd prometheus*/
 
