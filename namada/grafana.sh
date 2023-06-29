@@ -66,6 +66,7 @@ echo -e "${green}*************Download and extract Prometheus***********${reset}
 cd $HOME
 wget https://github.com/prometheus/prometheus/releases/download/v2.45.0/prometheus-2.45.0.linux-amd64.tar.gz
 sleep 1
+rm prometheus*.tar.gz
 tar xvf prometheus*.tar.gz
 cd prometheus*/
 
@@ -212,7 +213,7 @@ check_service_status "grafana-server"
 
 # Change config
 echo -e "${green}*************Change config prometheus ON ***********${reset}"
-file_path="$HOME/.local/share/namada/public-testnet-9.0.5aa315d1a22/config.toml"
+file_path="$HOME/.local/share/namada/$CHAIN_ID/config.toml"
 search_text="prometheus = false"
 replacement_text="prometheus = true"
 
