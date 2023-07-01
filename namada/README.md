@@ -149,9 +149,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.17.3" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.17.5" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-9.0.5aa315d1a22" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-10.3718993c3648" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
