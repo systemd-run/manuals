@@ -1,6 +1,7 @@
 ## manuals by systemd
 
 ### nodes
+[. subspace](https://github.com/systemd-run/manuals/tree/main/subspace)
 
 [. namada](https://github.com/systemd-run/manuals/tree/main/namada)
 
