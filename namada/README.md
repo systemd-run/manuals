@@ -1,11 +1,11 @@
-## UPDATE for new release v0.17.5
+## UPDATE for new release v0.20.1
 
 ```bash
-##only if you update from v0.17.3 !
+##only if you update from v0.17.5 !
 ##IF NOT go to delete section and reinstalling everything again
 
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
 systemctl stop namadad && systemctl disable namadad
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
 rm $HOME/.local/share/namada -rf
@@ -18,8 +18,8 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.17.5
-NEWCHAINID=public-testnet-10.3718993c3648
+NEWTAG=v0.20.1
+NEWCHAINID=TBD
 
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
@@ -37,23 +37,14 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.17.5
+#output: Namada v0.20.1
 
 
 
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
-cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
-
-#check hashes of MASP parameters
-cd .masp-params && shasum masp*
-
-#outputs
-#8bb101baaa03292b237b1788c4ab4d2fd6f976b2  masp-convert.params
-#6dfb73efa344c2d55946150e101d76f70bd6026a  masp-output.params
-#62c942ea09a6f318fdb5899fb112c283e2185040  masp-spend.params
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
@@ -72,32 +63,6 @@ sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
 
 ```
-
-## UPDATE for new release v0.17.3
-
-```bash
-
-#remove the node and install everything on a new one 
- 
-
-cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
-cp -r .namada/pre-genesis $HOME/namada_backup
-systemctl stop namadad && systemctl disable namadad
-rm /etc/systemd/system/namada* -rf
-rm $(which namada) -rf
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan -rf
-rm /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
-rm $HOME/.namada* -rf
-rm $HOME/.local/share/namada -rf
-rm $HOME/namada -rf
-rm $HOME/tendermint -rf
-rm $HOME/cometbft -rf
-
-#go to namada setup
-
-```
-
 
 ## namada setup  
 ```bash
@@ -149,9 +114,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.17.5" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.20.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-10.3718993c3648" >> ~/.bash_profile
+echo "export CHAIN_ID=TBD" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -159,9 +124,6 @@ echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export VALIDATOR_ALIAS=YOUR_MONIKER" >> ~/.bash_profile
 
 source ~/.bash_profile
-
-
-
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
@@ -201,13 +163,8 @@ EOF
 sudo systemctl daemon-reload
 sudo systemctl enable namadad
 
-
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
-mkdir $HOME/.local/
-mkdir $HOME/.local/share/
-mkdir $HOME/.local/share/namada
-cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
