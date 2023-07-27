@@ -276,8 +276,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
-cp -r .namada/pre-genesis $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
