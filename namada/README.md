@@ -85,7 +85,7 @@ cargo --version
 node -v
   
 if ! [ -x "$(command -v go)" ]; then
-  ver="1.19.4"
+  ver="1.20.5"
   cd $HOME
   wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
   sudo rm -rf /usr/local/go
