@@ -19,7 +19,7 @@ sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
 NEWTAG=v0.20.1
-NEWCHAINID=TBD
+NEWCHAINID=public-testnet-11.cc649ddd49b0
 
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
@@ -116,7 +116,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 echo "export NAMADA_TAG=v0.20.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=TBD" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-11.cc649ddd49b0" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
