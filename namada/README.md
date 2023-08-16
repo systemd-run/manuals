@@ -45,7 +45,7 @@ namada --version
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
-cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
+cp -r $HOME/namada_backup_old/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
