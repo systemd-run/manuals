@@ -5,7 +5,7 @@
 ##IF NOT go to delete section and reinstalling everything again
 
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old/pre-genesis
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup/
 systemctl stop namadad && systemctl disable namadad
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
 rm $HOME/.local/share/namada -rf
@@ -45,7 +45,7 @@ namada --version
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
-cp -r $HOME/namada_backup_old/pre-genesis* $BASE_DIR/
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
@@ -278,7 +278,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
