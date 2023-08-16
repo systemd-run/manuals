@@ -5,7 +5,7 @@
 ##IF NOT go to delete section and reinstalling everything again
 
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old/pre-genesis
 systemctl stop namadad && systemctl disable namadad
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
 rm $HOME/.local/share/namada -rf
