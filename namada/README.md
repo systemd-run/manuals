@@ -21,6 +21,7 @@ sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 NEWTAG=v0.21.1
 NEWCHAINID=public-testnet-12.f2e89e279cb3
 
+echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
 source ~/.bash_profile
@@ -44,6 +45,7 @@ namada --version
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
