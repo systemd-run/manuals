@@ -19,7 +19,7 @@ sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
 NEWTAG=v0.21.1
-NEWCHAINID=public-testnet-12.f2e89e279cb3
+NEWCHAINID=public-testnet-12.fedec12f3428
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
@@ -87,7 +87,7 @@ cargo --version
 node -v
   
 if ! [ -x "$(command -v go)" ]; then
-  ver="1.19.4"
+  ver="1.20.5"
   cd $HOME
   wget "https://golang.org/dl/go$ver.linux-amd64.tar.gz"
   sudo rm -rf /usr/local/go
@@ -118,7 +118,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 echo "export NAMADA_TAG=v0.21.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-12.f2e89e279cb3" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-12.fedec12f3428" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -271,7 +271,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change Chain_ID               for example (public-testnet-12.f2e89e279cb3)
+# Change Chain_ID               for example (public-testnet-12.fedec12f3428)
 ```
 
 ## DELETE NODE!!!
