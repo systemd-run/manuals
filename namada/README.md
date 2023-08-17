@@ -1,11 +1,11 @@
-## UPDATE for new release v0.20.1
+## UPDATE for new release v0.21.1
 
 ```bash
-##only if you update from v0.17.5 !
+##only if you update from v0.20.1 !
 ##IF NOT go to delete section and reinstalling everything again
 
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup/
 systemctl stop namadad && systemctl disable namadad
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
 rm $HOME/.local/share/namada -rf
@@ -18,9 +18,10 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.20.1
-NEWCHAINID=TBD
+NEWTAG=v0.21.1
+NEWCHAINID=public-testnet-12.f2e89e279cb3
 
+echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
 source ~/.bash_profile
@@ -37,13 +38,14 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.20.1
+#output: Namada v0.21.1
 
 
 
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
+cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
@@ -114,9 +116,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.20.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.21.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=TBD" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-12.f2e89e279cb3" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -269,14 +271,14 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change Chain_ID               for example (public-testnet-10.3718993c3648)
+# Change Chain_ID               for example (public-testnet-12.f2e89e279cb3)
 ```
 
 ## DELETE NODE!!!
 
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup_old
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
