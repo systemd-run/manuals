@@ -7,7 +7,7 @@
 cd $HOME && mkdir $HOME/namada_backup
 cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup/
 systemctl stop namadad && systemctl disable namadad
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw  -rf
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
 rm $HOME/.local/share/namada -rf
 rm -rf $HOME/.masp-params
 
@@ -33,7 +33,8 @@ make build-release
 cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
 cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
 cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
+cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 systemctl enable namadad
 
 #check version
@@ -137,7 +138,8 @@ cd $HOME && cp $HOME/cometbft/build/cometbft /usr/local/bin/cometbft && \
 cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
 cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
 cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
+cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 
 cometbft version
 namada --version
