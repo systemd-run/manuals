@@ -1,8 +1,7 @@
-## UPDATE for new release v0.21.1
+## UPDATE for new release v0.22.0
 
 ```bash
-##only if you update from v0.20.1 !
-##IF NOT go to delete section and reinstalling everything again
+
 
 cd $HOME && mkdir $HOME/namada_backup
 cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup/
@@ -18,8 +17,8 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.21.1
-NEWCHAINID=public-testnet-12.fedec12f3428
+NEWTAG=v0.22.0
+NEWCHAINID=TBD
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
@@ -39,7 +38,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.21.1
+#output: Namada v0.22.0
 
 
 
@@ -117,9 +116,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.21.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.22.0" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-12.fedec12f3428" >> ~/.bash_profile
+echo "export CHAIN_ID=TBD" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -194,17 +193,15 @@ namada client transfer \
   --target $WALLET \
   --token NAM \
   --amount 1000 \
-  --signer $WALLET
+  --signing-keys $WALLET
 
 cd $HOME
 namada client init-validator \
 --alias $VALIDATOR_ALIAS \
---source $WALLET \
 --commission-rate 0.05 \
 --max-commission-rate-change 0.01 \
---signer $WALLET \
---gas-amount 100000000 \
---gas-token NAM \
+--signing-keys $WALLET \
+--account-keys $WALLET \
 --unsafe-dont-encrypt
 
 
@@ -214,7 +211,7 @@ namada client transfer \
     --amount 1000 \
     --source faucet \
     --target $VALIDATOR_ALIAS \
-    --signer $VALIDATOR_ALIAS
+    --signing-keys $VALIDATOR_ALIAS
 	
 #use faucet again because min stake 1000 and you need some more NAM
 namada client transfer \
@@ -222,7 +219,7 @@ namada client transfer \
     --amount 1000 \
     --source faucet \
     --target $VALIDATOR_ALIAS \
-    --signer $VALIDATOR_ALIAS
+    --signing-keys $VALIDATOR_ALIAS
 	
 #check balance
 namada client balance --owner $VALIDATOR_ALIAS --token NAM
@@ -235,7 +232,6 @@ namada client epoch
 namada client bond \
 --validator $VALIDATOR_ALIAS \
 --amount 1888 \
---signer $VALIDATOR_ALIAS \
 --source $VALIDATOR_ALIAS
 
 #print your validator address
@@ -273,22 +269,21 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change Chain_ID               for example (public-testnet-12.fedec12f3428)
+# Change Chain_ID               for example (public-testnet-********)
 ```
 
 ## DELETE NODE!!!
 
 ```bash
 cd $HOME && mkdir $HOME/namada_backup
-cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup
+cp -r $HOME/.local/share/namada/pre-genesis $HOME/namada_backup/
 systemctl stop namadad && systemctl disable namadad
 rm /etc/systemd/system/namada* -rf
 rm $(which namada) -rf
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/tendermint /usr/local/bin/cometbft -rf
+rm /usr/local/bin/namada* /usr/local/bin/cometbft -rf
 rm $HOME/.namada* -rf
 rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
-rm $HOME/tendermint -rf
 rm $HOME/cometbft -rf
 
 ```
