@@ -28,6 +28,7 @@ source ~/.bash_profile
 cd $HOME/namada
 git fetch && git checkout $NAMADA_TAG
 make build-release
+cargo fix --lib -p namada_apps
 
 cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
 cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
@@ -129,6 +130,7 @@ source ~/.bash_profile
 
 cd $HOME && git clone https://github.com/anoma/namada && cd namada && git checkout $NAMADA_TAG
 make build-release
+cargo fix --lib -p namada_apps
 
 cd $HOME && git clone https://github.com/cometbft/cometbft.git && cd cometbft && git checkout $CBFT
 make build
