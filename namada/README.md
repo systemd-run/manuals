@@ -1,4 +1,4 @@
-## UPDATE for new release v0.22.0
+## UPDATE for new release v0.23.0
 
 ```bash
 
@@ -17,8 +17,8 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.22.0
-NEWCHAINID=public-testnet-13.facd514666d5
+NEWTAG=v0.23.0
+NEWCHAINID=public-testnet-14.5d79b6958580
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
@@ -38,7 +38,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.22.0
+#output: Namada v0.23.0
 
 
 
@@ -116,9 +116,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.22.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.23.0" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-13.facd514666d5" >> ~/.bash_profile
+echo "export CHAIN_ID=public-testnet-14.5d79b6958580" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
