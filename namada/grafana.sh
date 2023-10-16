@@ -174,7 +174,14 @@ check_service_status "prometheus"
 echo -e "${green}*************Install and start Prometheus Node Exporter***********${reset}"
 apt install prometheus-node-exporter -y
 
-rm /etc/systemd/system/prometheus-node-exporter.service
+service_file="/etc/systemd/system/prometheus-node-exporter.service"
+
+if [ -e "$service_file" ]; then
+    rm "$service_file"
+    echo "File $service_file removed."
+else
+    echo "File $service_file does not exist."
+fi
 
 sudo tee /etc/systemd/system/prometheus-node-exporter.service<<EOF
 [Unit]
