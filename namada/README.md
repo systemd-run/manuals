@@ -17,7 +17,7 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.23.0
+NEWTAG=v0.23.1
 NEWCHAINID=public-testnet-14.5d79b6958580
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
@@ -39,7 +39,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.23.0
+#output: Namada v0.23.1
 
 
 
