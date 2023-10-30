@@ -1,4 +1,4 @@
-## UPDATE for new release v0.23.0
+## UPDATE for new release v0.23.1
 
 ```bash
 
@@ -117,7 +117,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.23.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.23.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
 echo "export CHAIN_ID=public-testnet-14.5d79b6958580" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
