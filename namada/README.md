@@ -22,7 +22,7 @@ NEWCHAINID=public-testnet-14.5d79b6958580
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
-echo "export CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
+echo "export NAMADA_CHAIN_ID=$NEWCHAINID" >> ~/.bash_profile
 source ~/.bash_profile
 
 cd $HOME/namada
@@ -47,14 +47,14 @@ namada --version
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 mkdir $HOME/.local/share/namada
 cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
-namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
 
 
 #run fullnode post-genesis
-cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
+cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
 
@@ -119,7 +119,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 echo "export NAMADA_TAG=v0.23.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export CHAIN_ID=public-testnet-14.5d79b6958580" >> ~/.bash_profile
+echo "export NAMADA_CHAIN_ID=public-testnet-14.5d79b6958580" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -170,13 +170,13 @@ sudo systemctl enable namadad
 
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
-namada client utils join-network --chain-id $CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
 
 
 #run fullnode post-genesis
-cd $HOME && namada client utils join-network --chain-id $CHAIN_ID
+cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
 #waiting full synchronization
@@ -238,7 +238,7 @@ namada client bond \
 
 #print your validator address
 
-RAW_ADDRESS=`cat "$HOME/.local/share/namada/$CHAIN_ID/wallet.toml" | grep "address ="`
+RAW_ADDRESS=`cat "$HOME/.local/share/namada/$NAMADA_CHAIN_ID/wallet.toml" | grep "address ="`
 WALLET_ADDRESS=$(echo -e $RAW_ADDRESS | sed 's|.*=||' | sed -e 's/^ "//' | sed -e 's/"$//')
 echo "export WALLET_ADDRESS=$WALLET_ADDRESS" >> ~/.bash_profile
 source ~/.bash_profile
@@ -271,7 +271,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change Chain_ID               for example (public-testnet-********)
+# Change NAMADA_Chain_ID               for example (public-testnet-********)
 ```
 
 ## DELETE NODE!!!
