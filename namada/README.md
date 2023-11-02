@@ -187,16 +187,19 @@ curl -s localhost:26657/status
 #--------------------------------------------------------------
 #Make wallet and run validator
 
+#check epoch number
+namada client epoch
+
 cd $HOME
 namada wallet address gen --alias $WALLET --unsafe-dont-encrypt
+namada wallet address find --alias $WALLET
 
-namada client transfer \
-  --source faucet \
-  --target $WALLET \
-  --token NAM \
-  --amount 1000 \
-  --signing-keys $WALLET
+#copy address wallet then use faucet https://faucet.heliax.click/ 
+#waiting  2 epoch
+#check balance
+namada client balance --owner $WALLET --token NAM
 
+#init-validator
 cd $HOME
 namada client init-validator \
 --alias $VALIDATOR_ALIAS \
@@ -206,50 +209,27 @@ namada client init-validator \
 --account-keys $WALLET \
 --unsafe-dont-encrypt
 
+#waiting  2 epoch
+#print your validator address
+namada wallet address find --alias $VALIDATOR_ALIAS
 
-cd $HOME
-namada client transfer \
-    --token NAM \
-    --amount 1000 \
-    --source faucet \
-    --target $VALIDATOR_ALIAS \
-    --signing-keys $VALIDATOR_ALIAS
-	
-#use faucet again because min stake 1000 and you need some more NAM
-namada client transfer \
-    --token NAM \
-    --amount 1000 \
-    --source faucet \
-    --target $VALIDATOR_ALIAS \
-    --signing-keys $VALIDATOR_ALIAS
-	
-#check balance
+#copy address wallet then use faucet https://faucet.heliax.click/
+#check balance, should be more than 1001 NAM
 namada client balance --owner $VALIDATOR_ALIAS --token NAM
 
-#check epoch number
-namada client epoch
-
 #stake your funds
-#waiting  2 epoch and continue if you get INFO atest1... doesn't belong to any known validator account.
 namada client bond \
 --validator $VALIDATOR_ALIAS \
---amount 1888 \
+--amount 1002 \
 --source $VALIDATOR_ALIAS
 
-#print your validator address
-
-RAW_ADDRESS=`cat "$HOME/.local/share/namada/$NAMADA_CHAIN_ID/wallet.toml" | grep "address ="`
-WALLET_ADDRESS=$(echo -e $RAW_ADDRESS | sed 's|.*=||' | sed -e 's/^ "//' | sed -e 's/"$//')
-echo "export WALLET_ADDRESS=$WALLET_ADDRESS" >> ~/.bash_profile
-source ~/.bash_profile
-echo -e "\033[32m YOUR WALLET ADDRESS: \033[35m $WALLET_ADDRESS"
-
-#waiting more than 2 epoch and check your status
+#waiting  2 epoch and check your status
 namada client bonded-stake --validator $VALIDATOR_ALIAS
 namada client bonds --validator $VALIDATOR_ALIAS
+namadac validator-state --validator $VALIDATOR_ALIAS
 
 #check only height logs
-sudo journalctl -u namadad -n 10000 -f -o cat | grep height
+sudo journalctl -u namadad -n 1000 -f -o cat | grep height
 ```
 
 ## INSTALL GRAFANA MONITORING
