@@ -3,6 +3,7 @@
 ```bash
 cd $HOME 
 sudo apt update && sudo apt upgrade -y
+sudo apt install awk
 
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 NEWTAG=v0.23.2
@@ -26,7 +27,11 @@ cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 
 namada --version
 #output: Namada v0.23.2
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+
+#change validator name in rpc
+config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
 ```
@@ -84,7 +89,11 @@ cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+
+#change validator name in rpc
+config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
 
@@ -110,7 +119,7 @@ cd $HOME
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config git make libssl-dev libclang-dev libclang-12-dev -y
 sudo apt install jq build-essential bsdmainutils ncdu gcc git-core chrony liblz4-tool -y
-sudo apt install uidmap dbus-user-session protobuf-compiler unzip -y
+sudo apt install awk uidmap dbus-user-session protobuf-compiler unzip -y
 
 
 cd $HOME
@@ -208,15 +217,23 @@ sudo systemctl enable namadad
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+
+#change validator name in rpc
+config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-#end--------------------------------------------------------------
+#end for PRE genesis validator ----------------------------------------------------------------------
 
 
 #run fullnode post-genesis
 cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
-sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
+
+#change validator name in rpc
+config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #waiting full synchronization
@@ -232,7 +249,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 # check "catching_up": false  --- is OK
 curl -s localhost:26657/status
 
-#--------------------------------------------------------------
+#-----------------------------------------------------------------------------
 #Make wallet and run validator
 
 #check epoch number
