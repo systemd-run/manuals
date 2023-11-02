@@ -1,3 +1,37 @@
+## UPDATE for new release v0.23.2
+
+```bash
+cd $HOME 
+sudo apt update && sudo apt upgrade -y
+
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
+NEWTAG=v0.23.2
+echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
+source ~/.bash_profile
+
+cd $HOME/namada
+git reset --hard HEAD
+git fetch && git checkout $NEWTAG
+make build-release
+#cargo fix --lib -p namada_apps
+
+systemctl stop namadad 
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
+cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
+
+namada --version
+#output: Namada v0.23.2
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
+
+```
+#end--------------------------------------------------------------
+
 ## UPDATE for new release v0.23.1
 
 ```bash
