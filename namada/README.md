@@ -30,7 +30,7 @@ namada --version
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
@@ -92,7 +92,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
@@ -220,7 +220,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end for PRE genesis validator ----------------------------------------------------------------------
@@ -232,7 +232,7 @@ sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
