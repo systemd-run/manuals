@@ -30,7 +30,7 @@ awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
 ```
-#end--------------------------------------------------------------
+
 
 ## UPDATE for new release v0.23.1
 
