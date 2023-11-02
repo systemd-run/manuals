@@ -49,7 +49,9 @@ mkdir $HOME/.local/share/namada
 cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
 
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
 
 
@@ -171,13 +173,17 @@ sudo systemctl enable namadad
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat 
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
 
 
 #run fullnode post-genesis
 cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
+awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml" > temp_file && mv temp_file "$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #waiting full synchronization
 #or use snapshot 
