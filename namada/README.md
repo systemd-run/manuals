@@ -180,6 +180,14 @@ cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 
 #waiting full synchronization
+#or use snapshot 
+sudo systemctl stop namadad
+cd $HOME && wget -c https://snsmln.xyz/data.tar
+sudo tar -xvf data.tar -C $HOME/.local/share/namada
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+#WARNING this is experimental feature
+#if not working delete folder rm $HOME/.local/share/namada -rf and join-network again
+
 
 # check "catching_up": false  --- is OK
 curl -s localhost:26657/status
