@@ -3,7 +3,7 @@
 ```bash
 cd $HOME 
 sudo apt update && sudo apt upgrade -y
-sudo apt install awk
+sudo apt install original-awk
 
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 NEWTAG=v0.23.2
@@ -30,7 +30,7 @@ namada --version
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
@@ -92,7 +92,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end--------------------------------------------------------------
@@ -119,7 +119,7 @@ cd $HOME
 sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config git make libssl-dev libclang-dev libclang-12-dev -y
 sudo apt install jq build-essential bsdmainutils ncdu gcc git-core chrony liblz4-tool -y
-sudo apt install awk uidmap dbus-user-session protobuf-compiler unzip -y
+sudo apt install original-awk uidmap dbus-user-session protobuf-compiler unzip -y
 
 
 cd $HOME
@@ -220,7 +220,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 #end for PRE genesis validator ----------------------------------------------------------------------
@@ -232,7 +232,7 @@ sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 
 #change validator name in rpc
 config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
+original-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
