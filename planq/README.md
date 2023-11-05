@@ -112,6 +112,31 @@ list = [
   ['transfer', 'channel-0'], # gravitybridge
 ]
 
+############################################################### JUNO BY ROAD @05.11.23 ###############################################################
+
+[[chains]]
+id = 'juno-1'
+rpc_addr = 'https://rpc.juno.bh.rocks:443'
+grpc_addr = 'https://grpc-juno-ia.cosmosia.notional.ventures:443'
+websocket_addr = 'wss://rpc.juno.bh.rocks:443/websocket'
+rpc_timeout = '30s'
+account_prefix = 'juno'
+key_name = 'relayer'
+store_prefix = 'ibc'
+max_tx_size = 1800000
+max_gas = 10000000
+gas_price = { price = 0.005, denom = 'ujuno' }
+gas_multiplier = 1.1 
+clock_drift = '15s'
+trusting_period = '14days'
+trust_threshold = { numerator = '1', denominator = '3' }
+memo_prefix = 'roadz | systemd juno'
+[chains.packet_filter]
+policy = 'allow'   
+list = [
+ ['transfer', 'channel-204'], # planq
+]
+
 ############################################################### COSMOS ##########################################################
 [[chains]]
 id = 'cosmoshub-4'
