@@ -1,43 +1,5 @@
-## UPDATE for new release v0.23.2
 
-```bash
-cd $HOME 
-sudo apt update && sudo apt upgrade -y
-sudo apt install original-awk
-
-sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
-NEWTAG=v0.23.2
-echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
-source ~/.bash_profile
-
-cd $HOME/namada
-git reset --hard HEAD
-git fetch && git checkout $NEWTAG
-make build-release
-#cargo fix --lib -p namada_apps
-
-systemctl stop namadad 
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
-
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
-cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
-cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
-cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
-
-namada --version
-#output: Namada v0.23.2
-
-#change validator name in rpc
-config_file="$HOME/.local/share/namada/public-testnet-14.5d79b6958580/config.toml"
-awk -v new_val="$VALIDATOR_ALIAS" '{ if ($1 == "moniker") $3 = "\"" new_val "\""; print }' "$config_file" > temp_file && mv temp_file "$config_file"
-
-sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
-
-```
-
-
-## UPDATE for new release v0.23.1
+## UPDATE for new release v0.28.0
 
 ```bash
 
@@ -50,14 +12,15 @@ rm $HOME/.local/share/namada -rf
 rm -rf $HOME/.masp-params
 
 sudo apt update && sudo apt upgrade -y
+sudo apt install original-awk libudev-dev
 
 #CHECK your vars in /.bash_profile and change if they not correctly
 sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.23.1
-NEWCHAINID=public-testnet-14.5d79b6958580
+NEWTAG=v0.28.0
+NEWCHAINID=TBD
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
@@ -78,7 +41,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.23.1
+#output: Namada v0.28.0
 
 
 
@@ -120,7 +83,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install curl tar wget clang pkg-config git make libssl-dev libclang-dev libclang-12-dev -y
 sudo apt install jq build-essential bsdmainutils ncdu gcc git-core chrony liblz4-tool -y
 sudo apt install original-awk uidmap dbus-user-session protobuf-compiler unzip -y
-
+sudo apt install libudev-dev
 
 cd $HOME
   sudo apt update
@@ -162,7 +125,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.23.2" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.28.0" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
 echo "export NAMADA_CHAIN_ID=public-testnet-14.5d79b6958580" >> ~/.bash_profile
 echo "export WALLET=wallet" >> ~/.bash_profile
