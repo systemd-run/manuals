@@ -11,7 +11,8 @@ source ~/.bash_profile
 
 cd $HOME/namada
 git reset --hard HEAD
-git fetch && git checkout $NAMADA_TAG
+git fetch
+git checkout $NAMADA_TAG
 make build-release
 
 systemctl stop namadad
