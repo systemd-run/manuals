@@ -1,3 +1,37 @@
+## SOFT UPDATE for new release v0.28.1
+
+```bash
+
+sudo apt update && sudo apt upgrade -y
+
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
+NEWTAG=v0.28.1
+echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
+source ~/.bash_profile
+
+cd $HOME/namada
+git reset --hard HEAD
+git fetch && git checkout $NAMADA_TAG
+make build-release
+
+systemctl stop namadad
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
+cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
+
+#check version
+namada --version
+#output: Namada v0.28.1
+
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+
+```
+
+
 
 ## namada setup  
 ```bash
@@ -49,7 +83,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.28.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.28.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
 echo "export NAMADA_CHAIN_ID=public-testnet-15.0dacadb8d663" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
