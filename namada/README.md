@@ -130,6 +130,7 @@ StandardError=syslog
 Restart=always
 RestartSec=10
 LimitNOFILE=65535
+LimitSTACK=infinity
 [Install]
 WantedBy=multi-user.target
 EOF
