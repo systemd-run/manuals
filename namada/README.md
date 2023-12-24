@@ -1,4 +1,4 @@
-## SOFT UPDATE for new release v0.28.1
+## SOFT UPDATE for new release v0.28.2
 
 ```bash
 
@@ -26,7 +26,7 @@ cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 
 #check version
 namada --version
-#output: Namada v0.28.1
+#output: Namada v0.28.2
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
@@ -84,7 +84,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.28.1" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.28.2" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
 echo "export NAMADA_CHAIN_ID=public-testnet-15.0dacadb8d663" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
