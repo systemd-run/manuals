@@ -1,38 +1,3 @@
-## SOFT UPDATE for new release v0.28.2
-
-```bash
-
-sudo apt update && sudo apt upgrade -y
-
-sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
-NEWTAG=v0.28.1
-echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
-source ~/.bash_profile
-
-cd $HOME/namada
-git reset --hard HEAD
-git fetch
-git checkout $NAMADA_TAG
-make build-release
-
-systemctl stop namadad
-rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
-
-cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
-cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
-cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
-cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
-
-#check version
-namada --version
-#output: Namada v0.28.2
-
-sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
-
-```
-
-
 
 ## namada setup  
 ```bash
@@ -207,7 +172,41 @@ namada client slashes
 namada client unjail-validator --validator $VALIDATOR_ALIAS --signing-keys $KEY_ALIAS --unsafe-dont-encrypt
 ```
 
-## UPDATE for new release v0.28.0
+## SOFT UPDATE for new release v0.28.2
+
+```bash
+
+sudo apt update && sudo apt upgrade -y
+
+sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
+NEWTAG=v0.28.2
+echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
+source ~/.bash_profile
+
+cd $HOME/namada
+git reset --hard HEAD
+git fetch
+git checkout $NAMADA_TAG
+make build-release
+
+systemctl stop namadad
+rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
+
+cd $HOME && cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
+cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
+cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
+cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
+
+#check version
+namada --version
+#output: Namada v0.28.2
+
+sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
+
+```
+
+## HARD UPDATE for new release v0.28.2
 
 ```bash
 
@@ -227,7 +226,7 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.28.0
+NEWTAG=v0.28.2
 NEWCHAINID=public-testnet-15.0dacadb8d663
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
@@ -250,7 +249,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.28.0
+#output: Namada v0.28.2
 
 
 
