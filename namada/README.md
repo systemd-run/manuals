@@ -42,7 +42,7 @@ rm -f $PROTOC_ZIP
 protoc --version
 
 #CHECK your vars in /.bash_profile and change if they not correctly
-sed -i '/public-testnet/d' "$HOME/.bash_profile"
+sed -i '/shielded-expedition/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 sed -i '/CBFT/d' "$HOME/.bash_profile"
@@ -222,7 +222,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install original-awk libudev-dev
 
 #CHECK your vars in /.bash_profile and change if they not correctly
-sed -i '/public-testnet/d' "$HOME/.bash_profile"
+sed -i '/shielded-expedition/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
@@ -297,7 +297,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # ...then import to Home/Dashboards/Import_dashboard new dashboard
 # ...Import via grafana.com     ID = 19014
 # Change Validator_ID           for example (D2FE325E52DBC76342A8ACA803767290707FC2CA)
-# Change NAMADA_Chain_ID               for example (public-testnet-********)
+# Change NAMADA_Chain_ID               for example (shielded-expedition-********)
 ```
 
 ## DELETE NODE!!!
