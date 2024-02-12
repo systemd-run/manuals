@@ -49,7 +49,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.31.0" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.31.4" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
 echo "export NAMADA_CHAIN_ID=shielded-expedition.b40d8e9055" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
@@ -172,14 +172,14 @@ namada client slashes
 namada client unjail-validator --validator $VALIDATOR_ALIAS --signing-keys $KEY_ALIAS --unsafe-dont-encrypt
 ```
 
-## SOFT UPDATE for new release v0.28.2
+## SOFT UPDATE for new release v0.31.4
 
 ```bash
 
 sudo apt update && sudo apt upgrade -y
 
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
-NEWTAG=v0.28.2
+NEWTAG=v0.31.4
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 source ~/.bash_profile
 
@@ -200,13 +200,13 @@ cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 
 #check version
 namada --version
-#output: Namada v0.28.2
+#output: Namada v0.31.4
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
-## HARD UPDATE for new release v0.28.2
+## HARD UPDATE for new release v0.31.4
 
 ```bash
 
@@ -226,7 +226,7 @@ sed -i '/public-testnet/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.28.2
+NEWTAG=v0.31.4
 NEWCHAINID=shielded-expedition.b40d8e9055
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
@@ -249,7 +249,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.28.2
+#output: Namada v0.31.4
 
 
 
