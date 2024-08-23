@@ -49,9 +49,9 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 #Setting up vars
 
-echo "export NAMADA_TAG=v0.31.5" >> ~/.bash_profile
+echo "export NAMADA_TAG=v0.43.0" >> ~/.bash_profile
 echo "export CBFT=v0.37.2" >> ~/.bash_profile
-echo "export NAMADA_CHAIN_ID=shielded-expedition.88f17d1d14" >> ~/.bash_profile
+echo "export NAMADA_CHAIN_ID="TBD"" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 
@@ -172,14 +172,14 @@ namada client slashes
 namada client unjail-validator --validator $VALIDATOR_ALIAS --signing-keys $KEY_ALIAS --unsafe-dont-encrypt
 ```
 
-## SOFT UPDATE for new release v0.31.5
+## SOFT UPDATE for new release v0.43.0
 
 ```bash
 
 sudo apt update && sudo apt upgrade -y
 
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
-NEWTAG=v0.31.5
+NEWTAG=v0.43.0
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
 source ~/.bash_profile
 
@@ -200,13 +200,13 @@ cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
 
 #check version
 namada --version
-#output: Namada v0.31.5
+#output: Namada v0.43.0
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 ```
 
-## HARD UPDATE for new release v0.31.5
+## HARD UPDATE for new release v0.43.0
 
 ```bash
 
@@ -217,7 +217,7 @@ systemctl stop namadad && systemctl disable namadad
 rm /usr/local/bin/namada /usr/local/bin/namadac /usr/local/bin/namadan /usr/local/bin/namadaw /usr/local/bin/namadar -rf
 rm $HOME/.local/share/namada -rf
 rm -rf $HOME/.masp-params
-cp "$HOME/.local/share/namada/shielded-expedition.88f17d1d14/cometbft/data/priv_validator_state.json" $HOME/namada_backup/priv_validator_state.json
+cp "$HOME/.local/share/namada/"TBD"/cometbft/data/priv_validator_state.json" $HOME/namada_backup/priv_validator_state.json
 
 sudo apt update && sudo apt upgrade -y
 sudo apt install original-awk libudev-dev
@@ -227,8 +227,8 @@ sed -i '/shielded-expedition/d' "$HOME/.bash_profile"
 sed -i '/NAMADA_TAG/d' "$HOME/.bash_profile"
 sed -i '/WALLET_ADDRESS/d' "$HOME/.bash_profile"
 
-NEWTAG=v0.31.5
-NEWCHAINID=shielded-expedition.88f17d1d14
+NEWTAG=v0.43.0
+NEWCHAINID="TBD"
 
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_TAG=$NEWTAG" >> ~/.bash_profile
@@ -250,7 +250,7 @@ systemctl enable namadad
 
 #check version
 namada --version
-#output: Namada v0.31.5
+#output: Namada v0.43.0
 
 
 
@@ -259,7 +259,7 @@ namada --version
 mkdir $HOME/.local/share/namada
 cp -r $HOME/namada_backup/pre-genesis* $BASE_DIR/
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
-cp  $HOME/namada_backup/priv_validator_state.json "$HOME/.local/share/namada/shielded-expedition.88f17d1d14/cometbft/data/priv_validator_state.json"
+cp  $HOME/namada_backup/priv_validator_state.json "$HOME/.local/share/namada/"TBD"/cometbft/data/priv_validator_state.json"
 
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
@@ -267,7 +267,7 @@ sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #run fullnode post-genesis
 cd $HOME && namada client utils join-network --chain-id $NAMADA_CHAIN_ID
-cp  $HOME/namada_backup/priv_validator_state.json "$HOME/.local/share/namada/shielded-expedition.88f17d1d14/cometbft/data/priv_validator_state.json"
+cp  $HOME/namada_backup/priv_validator_state.json "$HOME/.local/share/namada/"TBD"/cometbft/data/priv_validator_state.json"
 
 sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat 
 #end--------------------------------------------------------------
