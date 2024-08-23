@@ -50,7 +50,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 #Setting up vars
 
 echo "export NAMADA_TAG=v0.43.0" >> ~/.bash_profile
-echo "export CBFT=v0.37.2" >> ~/.bash_profile
+echo "export CBFT=v0.37.9" >> ~/.bash_profile
 echo "export NAMADA_CHAIN_ID="TBD"" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
