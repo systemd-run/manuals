@@ -234,7 +234,7 @@ else
   echo "Text replaced successfully."
 fi
 
-search_text2='namespace = "namada_tm"'
+search_text2='namespace = "cometbft"'
 replacement_text2='namespace = "namadan_tm"'
 
 # Check if the replacement text already exists in the file
