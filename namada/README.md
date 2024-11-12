@@ -74,8 +74,7 @@ cd $HOME && cp $HOME/cometbft/build/cometbft /usr/local/bin/cometbft && \
 cp "$HOME/namada/target/release/namada" /usr/local/bin/namada && \
 cp "$HOME/namada/target/release/namadac" /usr/local/bin/namadac && \
 cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan && \
-cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && \
-cp "$HOME/namada/target/release/namadar" /usr/local/bin/namadar
+cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw && 
 
 cometbft version
 namada --version
