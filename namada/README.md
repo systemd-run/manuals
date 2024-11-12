@@ -128,8 +128,11 @@ sudo systemctl start namadad && sudo journalctl -u namadad -f -o cat
 curl -s localhost:26657/status
 
 #-----------------------------------------------------------------------------
-#Make wallet and run validator
 
+```
+
+## Make wallet and run validator
+```bash
 #check epoch number
 namada client epoch
 
@@ -179,7 +182,6 @@ namada client unjail-validator --validator $VALIDATOR_ALIAS --signing-keys $KEY_
 
 ## INSTALL GRAFANA MONITORING
 
-
 ```bash
 cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/manuals/main/namada/grafana.sh && chmod +x grafana.sh && ./grafana.sh
 
@@ -199,6 +201,9 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # Change NAMADA_Chain_ID               for example (chainname-********)
 ```
 
+
+<details>
+  <summary>Delete Node Instructions</summary>
 ## DELETE NODE!!!
 
 ```bash
@@ -214,3 +219,4 @@ rm $HOME/namada -rf
 rm $HOME/cometbft -rf
 
 ```
+<details>
