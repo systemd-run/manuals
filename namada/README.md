@@ -1,5 +1,6 @@
 
-## namada setup  
+## Namada setup
+
 ```bash
 #install update and libs
 cd $HOME
@@ -201,10 +202,6 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 # Change NAMADA_Chain_ID               for example (chainname-********)
 ```
 
-
-<details>
-  <summary>Delete Node Instructions</summary>
-
 ## DELETE NODE!!!
 
 ```bash
@@ -218,4 +215,4 @@ rm $HOME/.namada* -rf
 rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
 rm $HOME/cometbft -rf
-</details> ```
+```
