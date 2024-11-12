@@ -204,6 +204,7 @@ cd $HOME && wget -q -O grafana.sh https://raw.githubusercontent.com/systemd-run/
 
 <details>
   <summary>Delete Node Instructions</summary>
+
 ## DELETE NODE!!!
 
 ```bash
@@ -217,6 +218,4 @@ rm $HOME/.namada* -rf
 rm $HOME/.local/share/namada -rf
 rm $HOME/namada -rf
 rm $HOME/cometbft -rf
-
-```
-<details>
+</details> ```
