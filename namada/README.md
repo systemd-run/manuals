@@ -108,6 +108,15 @@ sudo systemctl enable namadad
 #ONLY for PRE genesis validator
 #IF YOU NOT A PRE GEN VALIDATOR SKIP THIS SECTION
 namada client utils join-network --chain-id $NAMADA_CHAIN_ID --genesis-validator $VALIDATOR_ALIAS
+
+# add persistent peer (adjust for base_dir if needed)
+sed -i \
+'s#persistent_peers = ".*"#persistent_peers = "'\
+'tcp://05309c2cce2d163027a47c662066907e89cd6b99@74.50.93.254:26656,'\
+'tcp://2bf5cdd25975c239e8feb68153d69c5eec004fdb@64.118.250.82:46656,'\
+'tcp://75825cae136729aaf519ad62684b9b796c5593fd@138.197.133.118:26656"#' \
+$HOME/.local/share/namada/namada-dryrun.abaaeaf7b78cb3ac/config.toml
+
 sudo systemctl restart namadad && sudo journalctl -u namadad -f -o cat
 
 #end for PRE genesis validator
