@@ -52,7 +52,7 @@ sed -i '/CBFT/d' "$HOME/.bash_profile"
 
 echo "export NAMADA_TAG=v0.45.1" >> ~/.bash_profile
 echo "export CBFT=v0.37.11" >> ~/.bash_profile
-echo "export CHAIN_ID=namada-dryrun.abaaeaf7b78cb3ac" >> ~/.bash_profile
+echo "export NAMADA_CHAIN_ID=namada-dryrun.abaaeaf7b78cb3ac" >> ~/.bash_profile
 echo "export KEY_ALIAS=wallet" >> ~/.bash_profile
 echo "export BASE_DIR=$HOME/.local/share/namada" >> ~/.bash_profile
 echo "export NAMADA_NETWORK_CONFIGS_SERVER=https://testnet.namada-dryrun.tududes.com/configs" >> ~/.bash_profile
