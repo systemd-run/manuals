@@ -90,7 +90,6 @@ User=$USER
 WorkingDirectory=$HOME/.local/share/namada
 Environment="NAMADA_CMT_STDOUT=true"
 Environment="CMT_LOG_LEVEL=p2p:debug,pex:info"
-Environment=NAMADA_CMT_STDOUT=true
 ExecStart=/usr/local/bin/namada node ledger run
 Restart=always
 RestartSec=10
