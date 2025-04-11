@@ -58,7 +58,7 @@ sudo systemctl start namadad
 success "Namada daemon started"
 
 log "Waiting for Namada node to fully initialize..."
-TIMEOUT=60
+TIMEOUT=600
 SLEEP_INTERVAL=3
 CHECK_COUNT=0
 FOUND_NODE_STARTED=0
@@ -93,14 +93,29 @@ if [ "$FOUND_VALIDATOR" -ne 1 ]; then
 fi
 
 log "Waiting for node to fully synchronize..."
+SYNC_RETRY=0
+SYNC_MAX_RETRY=600
+
 while true; do
-    SYNC_STATUS=$(curl -s localhost:26657/status | grep catching_up)
-    echo -e "${YELLOW}[$(date '+%H:%M:%S')] ${SYNC_STATUS}${NC}"
-    if echo "$SYNC_STATUS" | grep -q "false"; then
-        success "Node is fully synchronized"
-        break
+    STATUS_JSON=$(curl -s localhost:26657/status || echo "")
+    
+    if [ -z "$STATUS_JSON" ]; then
+        warn "RPC not ready yet... waiting ($((SYNC_RETRY * 5))s elapsed)"
     else
-        warn "Node is still catching up... rechecking in 5 seconds"
-        sleep 5
+        CATCHING_UP=$(echo "$STATUS_JSON" | grep catching_up | grep -oE 'true|false')
+        echo -e "${YELLOW}[$(date '+%H:%M:%S')] catching_up = $CATCHING_UP${NC}"
+        
+        if [ "$CATCHING_UP" = "false" ]; then
+            success "Node is fully synchronized"
+            break
+        fi
     fi
+
+    SYNC_RETRY=$((SYNC_RETRY + 1))
+    if [ "$SYNC_RETRY" -ge "$SYNC_MAX_RETRY" ]; then
+        error "Timeout: Node did not synchronize after $((SYNC_MAX_RETRY * 5)) seconds"
+    fi
+
+    sleep 5
 done
+
