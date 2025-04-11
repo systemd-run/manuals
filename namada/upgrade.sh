@@ -57,6 +57,41 @@ log "Starting Namada daemon..."
 sudo systemctl start namadad
 success "Namada daemon started"
 
+log "Waiting for Namada node to fully initialize..."
+TIMEOUT=60
+SLEEP_INTERVAL=3
+CHECK_COUNT=0
+FOUND_NODE_STARTED=0
+FOUND_VALIDATOR=0
+
+while [ $CHECK_COUNT -lt $((TIMEOUT / SLEEP_INTERVAL)) ]; do
+    LOG_OUTPUT=$(journalctl -u namadad -n 100 --no-pager 2>/dev/null)
+
+    if echo "$LOG_OUTPUT" | grep -q "Namada ledger node started"; then
+        FOUND_NODE_STARTED=1
+    fi
+    if echo "$LOG_OUTPUT" | grep -q "This node is a validator"; then
+        FOUND_VALIDATOR=1
+    fi
+
+    if [ "$FOUND_NODE_STARTED" -eq 1 ] && [ "$FOUND_VALIDATOR" -eq 1 ]; then
+        success "Namada node is running and identified as validator"
+        break
+    fi
+
+    warn "Waiting for Namada to fully start... ($((CHECK_COUNT * SLEEP_INTERVAL))s elapsed)"
+    sleep $SLEEP_INTERVAL
+    CHECK_COUNT=$((CHECK_COUNT + 1))
+done
+
+if [ "$FOUND_NODE_STARTED" -ne 1 ]; then
+    error "Timeout: Namada ledger node did not start properly."
+fi
+
+if [ "$FOUND_VALIDATOR" -ne 1 ]; then
+    error "Timeout: Node did not announce itself as a validator."
+fi
+
 log "Waiting for node to fully synchronize..."
 while true; do
     SYNC_STATUS=$(curl -s localhost:26657/status | grep catching_up)
