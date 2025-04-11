@@ -50,4 +50,22 @@ sudo cp "$HOME/namada/target/release/namadan" /usr/local/bin/namadan
 sudo cp "$HOME/namada/target/release/namadaw" /usr/local/bin/namadaw
 success "Binaries copied"
 
-log "
+log "Checking Namada version..."
+namada --version || error "Failed to get Namada version"
+
+log "Starting Namada daemon..."
+sudo systemctl start namadad
+success "Namada daemon started"
+
+log "Waiting for node to fully synchronize..."
+while true; do
+    SYNC_STATUS=$(curl -s localhost:26657/status | grep catching_up)
+    echo -e "${YELLOW}[$(date '+%H:%M:%S')] ${SYNC_STATUS}${NC}"
+    if echo "$SYNC_STATUS" | grep -q "false"; then
+        success "Node is fully synchronized"
+        break
+    else
+        warn "Node is still catching up... rechecking in 5 seconds"
+        sleep 5
+    fi
+done
